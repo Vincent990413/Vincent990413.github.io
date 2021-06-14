@@ -1,0 +1,576 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content=".back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;} .back-top&gt;a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE学习笔记-3-SpringBoot+SpringJPA+Vue 开发实战">
+<meta property="og:url" content="https://vincent990413.github.io/2021/04/01/VUE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%9B%B8%E5%BA%94%E5%BA%94%E7%94%A8-3/index.html">
+<meta property="og:site_name" content="斯人若彩虹 遇上方知有">
+<meta property="og:description" content=".back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;} .back-top&gt;a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401092413748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401092523236.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401092946618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401093021644.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401093044712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401093103753.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401093525334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401094008692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401094243603.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401094402953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401095150394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401095205169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401095231868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401145910741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021040115270020.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-04-01T07:28:47.000Z">
+<meta property="article:modified_time" content="2021-05-16T09:25:22.000Z">
+<meta property="article:author" content="何水浪">
+<meta property="article:tag" content="前端框架学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210401092413748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70"><title>VUE学习笔记-3-SpringBoot+SpringJPA+Vue 开发实战 | 斯人若彩虹 遇上方知有</title><link ref="canonical" href="https://vincent990413.github.io/2021/04/01/VUE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%9B%B8%E5%BA%94%E5%BA%94%E7%94%A8-3/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="斯人若彩虹 遇上方知有" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">斯人若彩虹 遇上方知有</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">VUE学习笔记-3-SpringBoot+SpringJPA+Vue 开发实战</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-04-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-05-16</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.4k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">20分</span></span></div></header><div class="post-body"><!-- 页面必备样式 -->
+<style>
+.back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;}
+.back-top>a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height: 50px;border-radius: 50px;background-color:rgba(255,255,255,0.5);}
+</style>
+<div class="back-top">
+    <a href="#top"> >返回顶部< </a>
+</div>
+<!-- toc -->
+<!-- 必备样式结束 -->
+
+
+        <h1 id="原生VUE实战（查询数据）（含SpringBoot-Vue）"   >
+          <a href="#原生VUE实战（查询数据）（含SpringBoot-Vue）" class="heading-link"><i class="fas fa-link"></i></a><a href="#原生VUE实战（查询数据）（含SpringBoot-Vue）" class="headerlink" title="原生VUE实战（查询数据）（含SpringBoot+Vue）"></a>原生VUE实战（查询数据）（含SpringBoot+Vue）</h1>
+      
+        <h2 id="1-创建VUE项目"   >
+          <a href="#1-创建VUE项目" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-创建VUE项目" class="headerlink" title="1.创建VUE项目"></a>1.创建VUE项目</h2>
+      <p><strong>在命令行中输入</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></div></figure>
+<p><img   src="https://img-blog.csdnimg.cn/20210401092413748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+
+        <h2 id="2-进入dashboard中-创建项目"   >
+          <a href="#2-进入dashboard中-创建项目" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-进入dashboard中-创建项目" class="headerlink" title="2.进入dashboard中 创建项目"></a>2.进入dashboard中 创建项目</h2>
+      <p><img   src="https://img-blog.csdnimg.cn/20210401092523236.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+
+        <h2 id="3-进入VUE-工程管家创建工程"   >
+          <a href="#3-进入VUE-工程管家创建工程" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-进入VUE-工程管家创建工程" class="headerlink" title="3.进入VUE 工程管家创建工程"></a>3.进入VUE 工程管家创建工程</h2>
+      <p><img   src="https://img-blog.csdnimg.cn/20210401092946618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>修改以下参数</strong><br><img src="https://img-blog.csdnimg.cn/20210401093021644.png" alt="在这里插入图片描述"><br><img   src="https://img-blog.csdnimg.cn/20210401093044712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210401093103753.png" alt="在这里插入图片描述"><br>创建完之后就可以了。</p>
+
+        <h2 id="4-从IDEA中导入项目编写前端代码"   >
+          <a href="#4-从IDEA中导入项目编写前端代码" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-从IDEA中导入项目编写前端代码" class="headerlink" title="4.从IDEA中导入项目编写前端代码"></a>4.从IDEA中导入项目编写前端代码</h2>
+      <p>打开IDEA-&gt;导入项目….</p>
+<ol>
+<li>安装Vue.js插件</li>
+<li>修改JavaScript语言为<strong>ECMAScript 6</strong></li>
+<li>在控制台中输入<strong>npm run serve</strong>来启动项目</li>
+</ol>
+<h1 id=""><a href="#" class="headerlink" title="*******************"></a>*******************</h1>
+        <h1 id="（开发从这里开始）VUE前端项目的结构图"   >
+          <a href="#（开发从这里开始）VUE前端项目的结构图" class="heading-link"><i class="fas fa-link"></i></a><a href="#（开发从这里开始）VUE前端项目的结构图" class="headerlink" title="（开发从这里开始）VUE前端项目的结构图"></a>（开发从这里开始）VUE前端项目的结构图</h1>
+      <p>项目结构图如图所示：<br><img   src="https://img-blog.csdnimg.cn/20210401093525334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br>通过结构图我们可以知道：</p>
+<ul>
+<li>App.vue 是网页的主界面，页面中包括许多<strong>组件 component</strong></li>
+<li>其中Home、About都是导航栏，但注意<strong>我们导航至Home与About并不代表像传统意义那样，我们去打开一个新的页面。</strong>而是说，<strong>我们在页面上加载不同来源的内容</strong></li>
+</ul>
+<p>具体含义，如图所示：</p>
+<p> <img   src="https://img-blog.csdnimg.cn/20210401094008692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span> |</span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about&quot;</span>&gt;</span>About<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p>在上述代码中，我们可以看出<strong>router-link标签负责导航栏 to表示导航路径</strong><br>而具体的<strong>路径配置</strong>是交给项目结构中的<br><strong>router下的index.js来配置</strong></p>
+<p><strong>index.js中的关键代码如图</strong><br><img src="https://img-blog.csdnimg.cn/20210401094243603.png" alt="在这里插入图片描述"><br><strong>import代表从那个vue页面中导入相关组件</strong></p>
+<p>而在routes中具体配置相应的<strong>路径，名字，以及组件的名字</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210401094402953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ol>
+<li>这里的path需要<strong>与前端页面vue中router-link中的to属性参数一一对应</strong></li>
+<li>name可以不填写，但最好与组件名一致</li>
+<li>component代表组件 <strong>这里的component需要与import导入语句后面一致</strong></li>
+</ol>
+<p><strong>而对于VUE3.0，我们建立导航可以用新的写法：</strong></p>
+<p>import语句可以省略，除了写<strong>path与name</strong>参数之外，<br>我们的<strong>component参数</strong>可以变成：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">component:<span class="function">()=&gt;</span><span class="keyword">import</span>(<span class="string">&#x27;../views/About.vue)</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="创建SpringBoot项目"   >
+          <a href="#创建SpringBoot项目" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建SpringBoot项目" class="headerlink" title="创建SpringBoot项目"></a>创建SpringBoot项目</h1>
+      <p>添加以下依赖：<br><img   src="https://img-blog.csdnimg.cn/20210401095150394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br><img   src="https://img-blog.csdnimg.cn/20210401095205169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br><img   src="https://img-blog.csdnimg.cn/20210401095231868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br><strong>1. Lombok<br>2. Spring Web<br>3. Spring Data JPA<br>4. MySQL Driver</strong></p>
+<p>以上四个依赖</p>
+<p>1.资源文件中添加数据库文件连接信息：</p>
+<figure class="highlight yml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/vuetest?characterEncoding=utf-8&amp;serverTimezone=GMT%2B8</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">jpa:</span></span><br><span class="line">    <span class="attr">show-sql:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">properties:</span></span><br><span class="line">      <span class="attr">hibernate:</span></span><br><span class="line">        <span class="string">format_sql:true</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8181</span></span><br></pre></td></tr></table></div></figure>
+
+<ol>
+<li>连接数据库信息</li>
+<li>JPA打印SQL 格式化SQL</li>
+<li>端口8181 避免占用（vue的端口与后台的端口占用）</li>
+</ol>
+
+        <h1 id="建立实体类"   >
+          <a href="#建立实体类" class="heading-link"><i class="fas fa-link"></i></a><a href="#建立实体类" class="headerlink" title="建立实体类"></a>建立实体类</h1>
+      
+        <h2 id="User类（注意使用-Entity-Data注解-Id放在主键属性上）"   >
+          <a href="#User类（注意使用-Entity-Data注解-Id放在主键属性上）" class="heading-link"><i class="fas fa-link"></i></a><a href="#User类（注意使用-Entity-Data注解-Id放在主键属性上）" class="headerlink" title="User类（注意使用@Entity @Data注解 @Id放在主键属性上）"></a>User类（注意使用@Entity @Data注解 @Id放在主键属性上）</h2>
+      <p><strong>值得注意的是，类中的每个属性，在首字母小写后-必须等于数据库表中的字段名</strong></p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Entity;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="comment">//默认是类名首字母小写 与数据库中的表进行对应</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="ApiResponse-后端前台通用-交互类"   >
+          <a href="#ApiResponse-后端前台通用-交互类" class="heading-link"><i class="fas fa-link"></i></a><a href="#ApiResponse-后端前台通用-交互类" class="headerlink" title="ApiResponse 后端前台通用-交互类"></a>ApiResponse 后端前台通用-交互类</h2>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiResponse</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> code;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    <span class="keyword">private</span> Object data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCode</span><span class="params">(<span class="keyword">int</span> code)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="建立Repository层或称DAO层"   >
+          <a href="#建立Repository层或称DAO层" class="heading-link"><i class="fas fa-link"></i></a><a href="#建立Repository层或称DAO层" class="headerlink" title="建立Repository层或称DAO层"></a>建立Repository层或称DAO层</h1>
+      
+        <h2 id="UserRepository类-extends-JpaRepository-lt-User-Integer-gt"   >
+          <a href="#UserRepository类-extends-JpaRepository-lt-User-Integer-gt" class="heading-link"><i class="fas fa-link"></i></a><a href="#UserRepository类-extends-JpaRepository-lt-User-Integer-gt" class="headerlink" title="UserRepository类 extends JpaRepository&lt;User, Integer&gt;"></a>UserRepository类 extends JpaRepository&lt;User, Integer&gt;</h2>
+      <p><strong>（其中User是对应的类 Integer是主键）利用这种方法，可以避免写一些比如1.查询一条数据2.查询全部数据3.根据主键查询数据…</strong><br><strong>已经封装好了 常见的DAO层操作</strong></p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.demo.entity.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"></span><br><span class="line"><span class="comment">//继承已经封装好了的 JPA不用自己去写简单的 增删改查接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepositery</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">User</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="建立RepositoryTest测试类-先看看能不能获得到数据库的数据！"   >
+          <a href="#建立RepositoryTest测试类-先看看能不能获得到数据库的数据！" class="heading-link"><i class="fas fa-link"></i></a><a href="#建立RepositoryTest测试类-先看看能不能获得到数据库的数据！" class="headerlink" title="建立RepositoryTest测试类 先看看能不能获得到数据库的数据！"></a>建立RepositoryTest测试类 先看看能不能获得到数据库的数据！</h2>
+      <ol>
+<li>在类名上右键</li>
+<li>Goto中选择test<br> <img   src="https://img-blog.csdnimg.cn/20210401145910741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></li>
+<li>命名UserRepositeryTest<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserRepositeryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserRepositery userRepositery;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">findAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(userRepositery.findAll());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+<li>点击函数名左边的运行！测试看控制台能否读取数据库数据。</li>
+</ol>
+
+        <h1 id="建立Service层以及对应的Impl实现类"   >
+          <a href="#建立Service层以及对应的Impl实现类" class="heading-link"><i class="fas fa-link"></i></a><a href="#建立Service层以及对应的Impl实现类" class="headerlink" title="建立Service层以及对应的Impl实现类"></a>建立Service层以及对应的Impl实现类</h1>
+      <p><strong>值得注意的是 注解@Service应加在实现类上</strong></p>
+
+        <h2 id="UserService接口"   >
+          <a href="#UserService接口" class="heading-link"><i class="fas fa-link"></i></a><a href="#UserService接口" class="headerlink" title="UserService接口"></a>UserService接口</h2>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.example.demo.entity.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">showAllTheUsers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="UserServiceImpl实现类"   >
+          <a href="#UserServiceImpl实现类" class="heading-link"><i class="fas fa-link"></i></a><a href="#UserServiceImpl实现类" class="headerlink" title="UserServiceImpl实现类"></a>UserServiceImpl实现类</h2>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.example.demo.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.example.demo.repository.UserRepositery;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserRepositery userRepositery;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">showAllTheUsers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userRepositery.findAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="建立Controller层"   >
+          <a href="#建立Controller层" class="heading-link"><i class="fas fa-link"></i></a><a href="#建立Controller层" class="headerlink" title="建立Controller层"></a>建立Controller层</h1>
+      
+        <h2 id="UserController"   >
+          <a href="#UserController" class="heading-link"><i class="fas fa-link"></i></a><a href="#UserController" class="headerlink" title="UserController"></a>UserController</h2>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.example.demo.entity.ApiResponse;</span><br><span class="line"><span class="keyword">import</span> com.example.demo.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.example.demo.service.UserService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/show&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ApiResponse <span class="title">showAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ApiResponse apiResponse = <span class="keyword">new</span> ApiResponse();</span><br><span class="line">        List&lt;User&gt; users = userService.showAllTheUsers();</span><br><span class="line">        apiResponse.setData(users);</span><br><span class="line">        apiResponse.setMessage(<span class="string">&quot;返回成功！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> apiResponse;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>值得注意的是：@RestController = @Controller + @ResponseBody</strong>后台从数据库中查询到的数据<br>以XML或者JSON的格式，返回给前端。</p>
+
+        <h1 id="解决端口跨域的问题"   >
+          <a href="#解决端口跨域的问题" class="heading-link"><i class="fas fa-link"></i></a><a href="#解决端口跨域的问题" class="headerlink" title="解决端口跨域的问题"></a>解决端口跨域的问题</h1>
+      <p><strong>由于我们修改了SPRINGBOOT的端口为8181 而VUE默认是8080</strong>因此，我们需要对SpringBoot做一个配置！</p>
+
+        <h2 id="新建config-CorsConfig类"   >
+          <a href="#新建config-CorsConfig类" class="heading-link"><i class="fas fa-link"></i></a><a href="#新建config-CorsConfig类" class="headerlink" title="新建config.CorsConfig类"></a>新建config.CorsConfig类</h2>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        config.addAllowedOriginPattern(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        config.setAllowCredentials(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 允许服务端访问的客户端请求头</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许访问的方法名,GET POST等</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 对接口配置跨域设置</span></span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span> , config);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>到此为止，后台的代码基本算是完成了！<br>接下来开始编写</p>
+
+        <h1 id="-1"   >
+          <a href="#-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#-1" class="headerlink" title="*******************"></a>*******************</h1>
+      
+        <h1 id="前端代码开始-User导航栏"   >
+          <a href="#前端代码开始-User导航栏" class="heading-link"><i class="fas fa-link"></i></a><a href="#前端代码开始-User导航栏" class="headerlink" title="(前端代码开始)User导航栏"></a>(前端代码开始)User导航栏</h1>
+      <p><strong>修改App.vue文件中的template标签为</strong></p>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span> |</span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about&quot;</span>&gt;</span>About<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span>|</span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/user&quot;</span>&gt;</span>User<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>同时在router文件夹中的index.js文件中 配置router导航映射</strong>（见文章前部分内容！）</p>
+<p><strong>第一种方式：适用于VUE2（显式声明）</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> User <span class="keyword">from</span> <span class="string">&#x27;../views/User.vue&#x27;</span> <span class="comment">//建立VUE页面与组件的映射</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: Home</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;About&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: About  </span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/user&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;User&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: User <span class="comment">//从上方的import User中建立映射</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>第二种方式：建立隐式映射</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注释掉上方的import User from &#x27;../views/User.vue&#x27; </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//但是下方变成：</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/user&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;User&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">()=&gt;</span><span class="keyword">import</span>(<span class="string">&#x27;../views/User.vue&#x27;</span>) <span class="comment">//边声明组件 边建立映射</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="创建User-vue-具体显示内容"   >
+          <a href="#创建User-vue-具体显示内容" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建User-vue-具体显示内容" class="headerlink" title="创建User.vue 具体显示内容"></a>创建User.vue 具体显示内容</h1>
+      <p>在views文件夹下创建User.vue文件：</p>
+
+        <h2 id="Style-CSS样式"   >
+          <a href="#Style-CSS样式" class="heading-link"><i class="fas fa-link"></i></a><a href="#Style-CSS样式" class="headerlink" title="Style CSS样式"></a>Style CSS样式</h2>
+      <figure class="highlight css"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">    <span class="selector-tag">table</span>&#123;</span><br><span class="line">        <span class="attribute">font-size</span>:<span class="number">25px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">table</span>&#123;</span><br><span class="line">        <span class="attribute">table-layout</span>:fixed;</span><br><span class="line">        <span class="attribute">empty-cells</span>:show;</span><br><span class="line">        <span class="attribute">border-collapse</span>: collapse;</span><br><span class="line">        <span class="attribute">margin</span>:<span class="number">0</span> auto;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">td</span>&#123;</span><br><span class="line">        <span class="attribute">height</span>:<span class="number">20px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="JavaScript-利用axios与后台交互"   >
+          <a href="#JavaScript-利用axios与后台交互" class="heading-link"><i class="fas fa-link"></i></a><a href="#JavaScript-利用axios与后台交互" class="headerlink" title="JavaScript 利用axios与后台交互"></a>JavaScript 利用axios与后台交互</h2>
+      
+        <h3 id="第一步、添加axios插件（并修改一些内容）"   >
+          <a href="#第一步、添加axios插件（并修改一些内容）" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一步、添加axios插件（并修改一些内容）" class="headerlink" title="第一步、添加axios插件（并修改一些内容）"></a>第一步、添加axios插件（并修改一些内容）</h3>
+      <p><strong>首先，在命令行中输入</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue add axios</span><br></pre></td></tr></table></div></figure>
+
+<p>然后找到<strong>项目结构图中的plugins文件夹下面的axios.js</strong><br>粘贴以下代码：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Full config:  https://github.com/axios/axios#request-config</span></span><br><span class="line"><span class="comment">// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || &#x27;&#x27;;</span></span><br><span class="line"><span class="comment">// axios.defaults.headers.common[&#x27;Authorization&#x27;] = AUTH_TOKEN;</span></span><br><span class="line"><span class="comment">// axios.defaults.headers.post[&#x27;Content-Type&#x27;] = &#x27;application/x-www-form-urlencoded&#x27;;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> config = &#123;</span><br><span class="line">  <span class="comment">// baseURL: process.env.baseURL || process.env.apiUrl || &quot;&quot;</span></span><br><span class="line">  <span class="comment">// timeout: 60 * 1000, // Timeout</span></span><br><span class="line">  <span class="comment">// withCredentials: true, // Check cross-site Access-Control</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> _axios = axios.create(config);</span><br><span class="line"></span><br><span class="line">_axios.interceptors.request.use(</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something before request is sent</span></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something with request error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add a response interceptor</span></span><br><span class="line">_axios.interceptors.response.use(</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something with response data</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something with response error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> _axios</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="第二步、引用axios并发起get请求"   >
+          <a href="#第二步、引用axios并发起get请求" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二步、引用axios并发起get请求" class="headerlink" title="第二步、引用axios并发起get请求"></a>第二步、引用axios并发起get请求</h2>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;../plugins/axios&quot;</span>; <span class="comment">//引用axios </span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;User&quot;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span>&#123;</span><br><span class="line">                <span class="comment">// 具体的变量</span></span><br><span class="line">                <span class="attr">msg</span>: <span class="string">&#x27;Hello, Vue!&#x27;</span>,</span><br><span class="line">                <span class="attr">users</span>:[]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">created</span>(<span class="params"></span>)</span>&#123;  <span class="comment">//当网页准备就绪时</span></span><br><span class="line">            <span class="keyword">const</span> _data = <span class="built_in">this</span> <span class="comment">//利用这个this好使得在回调函数中 调用回调函数外的data中的数据</span></span><br><span class="line">            axios(<span class="string">&#x27;http://localhost:8181/user/show&#x27;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">                _data.users = response.data.data <span class="comment">//将controller返回给后台的data 赋给data中的数组</span></span><br><span class="line">            &#125;) <span class="comment">//跟ajax一样 直接请求8181端口下的请求路径 注意 已经配置了跨域！不用担心</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="第三步、将数据显示在网页中"   >
+          <a href="#第三步、将数据显示在网页中" class="heading-link"><i class="fas fa-link"></i></a><a href="#第三步、将数据显示在网页中" class="headerlink" title="第三步、将数据显示在网页中"></a>第三步、将数据显示在网页中</h2>
+      
+        <h2 id="template-HTML内容"   >
+          <a href="#template-HTML内容" class="heading-link"><i class="fas fa-link"></i></a><a href="#template-HTML内容" class="headerlink" title="template HTML内容"></a>template HTML内容</h2>
+      <figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--template中写html代码 且只能有一个根div节点--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>id<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>邮箱<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span> <span class="attr">v-for</span>=<span class="string">&quot;user of users&quot;</span>&gt;</span> </span><br><span class="line">            <span class="comment">&lt;!--利用for循环 加载data中users数组中数据--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> &gt;</span>&#123;&#123;user.id&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> &gt;</span>&#123;&#123;user.username&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> &gt;</span>&#123;&#123;user.password&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> &gt;</span>&#123;&#123;user.email&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p>到此为止。一个简单的<strong>查询数据库所有数据的请求就完成了</strong></p>
+<p>项目效果图如下：<br><img   src="https://img-blog.csdnimg.cn/2021040115270020.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://vincent990413.github.io">何水浪</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://vincent990413.github.io/2021/04/01/VUE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%9B%B8%E5%BA%94%E5%BA%94%E7%94%A8-3/">https://vincent990413.github.io/2021/04/01/VUE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%9B%B8%E5%BA%94%E5%BA%94%E7%94%A8-3/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://vincent990413.github.io/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">前端框架学习</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/04/05/Java%E6%8A%80%E5%B7%A7-Ajax%E8%AF%B7%E6%B1%82PostAndGet/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Ajax请求PostAndGet</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/28/VUE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%9B%B8%E5%BA%94%E5%BA%94%E7%94%A8-1/"><span class="paginator-prev__text">VUE学习笔记-基础语法及相应应用-1-基本语法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%94%9FVUE%E5%AE%9E%E6%88%98%EF%BC%88%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%EF%BC%89%EF%BC%88%E5%90%ABSpringBoot-Vue%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">
+          原生VUE实战（查询数据）（含SpringBoot+Vue）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">
+          1.创建VUE项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%9B%E5%85%A5dashboard%E4%B8%AD-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">
+          2.进入dashboard中 创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BF%9B%E5%85%A5VUE-%E5%B7%A5%E7%A8%8B%E7%AE%A1%E5%AE%B6%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">
+          3.进入VUE 工程管家创建工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BB%8EIDEA%E4%B8%AD%E5%AF%BC%E5%85%A5%E9%A1%B9%E7%9B%AE%E7%BC%96%E5%86%99%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">
+          4.从IDEA中导入项目编写前端代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">*******************</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%88%E5%BC%80%E5%8F%91%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%EF%BC%89VUE%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">
+          （开发从这里开始）VUE前端项目的结构图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE"><span class="toc-number">4.</span> <span class="toc-text">
+          创建SpringBoot项目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="toc-number">5.</span> <span class="toc-text">
+          建立实体类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#User%E7%B1%BB%EF%BC%88%E6%B3%A8%E6%84%8F%E4%BD%BF%E7%94%A8-Entity-Data%E6%B3%A8%E8%A7%A3-Id%E6%94%BE%E5%9C%A8%E4%B8%BB%E9%94%AE%E5%B1%9E%E6%80%A7%E4%B8%8A%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">
+          User类（注意使用@Entity @Data注解 @Id放在主键属性上）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ApiResponse-%E5%90%8E%E7%AB%AF%E5%89%8D%E5%8F%B0%E9%80%9A%E7%94%A8-%E4%BA%A4%E4%BA%92%E7%B1%BB"><span class="toc-number">5.2.</span> <span class="toc-text">
+          ApiResponse 后端前台通用-交互类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BRepository%E5%B1%82%E6%88%96%E7%A7%B0DAO%E5%B1%82"><span class="toc-number">6.</span> <span class="toc-text">
+          建立Repository层或称DAO层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UserRepository%E7%B1%BB-extends-JpaRepository-lt-User-Integer-gt"><span class="toc-number">6.1.</span> <span class="toc-text">
+          UserRepository类 extends JpaRepository&lt;User, Integer&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BRepositoryTest%E6%B5%8B%E8%AF%95%E7%B1%BB-%E5%85%88%E7%9C%8B%E7%9C%8B%E8%83%BD%E4%B8%8D%E8%83%BD%E8%8E%B7%E5%BE%97%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%81"><span class="toc-number">6.2.</span> <span class="toc-text">
+          建立RepositoryTest测试类 先看看能不能获得到数据库的数据！</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BService%E5%B1%82%E4%BB%A5%E5%8F%8A%E5%AF%B9%E5%BA%94%E7%9A%84Impl%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-number">7.</span> <span class="toc-text">
+          建立Service层以及对应的Impl实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UserService%E6%8E%A5%E5%8F%A3"><span class="toc-number">7.1.</span> <span class="toc-text">
+          UserService接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UserServiceImpl%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-number">7.2.</span> <span class="toc-text">
+          UserServiceImpl实现类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BController%E5%B1%82"><span class="toc-number">8.</span> <span class="toc-text">
+          建立Controller层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UserController"><span class="toc-number">8.1.</span> <span class="toc-text">
+          UserController</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%B7%A8%E5%9F%9F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">9.</span> <span class="toc-text">
+          解决端口跨域的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BAconfig-CorsConfig%E7%B1%BB"><span class="toc-number">9.1.</span> <span class="toc-text">
+          新建config.CorsConfig类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-1"><span class="toc-number">10.</span> <span class="toc-text">
+          *******************</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E5%BC%80%E5%A7%8B-User%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-number">11.</span> <span class="toc-text">
+          (前端代码开始)User导航栏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAUser-vue-%E5%85%B7%E4%BD%93%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9"><span class="toc-number">12.</span> <span class="toc-text">
+          创建User.vue 具体显示内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Style-CSS%E6%A0%B7%E5%BC%8F"><span class="toc-number">12.1.</span> <span class="toc-text">
+          Style CSS样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-%E5%88%A9%E7%94%A8axios%E4%B8%8E%E5%90%8E%E5%8F%B0%E4%BA%A4%E4%BA%92"><span class="toc-number">12.2.</span> <span class="toc-text">
+          JavaScript 利用axios与后台交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E3%80%81%E6%B7%BB%E5%8A%A0axios%E6%8F%92%E4%BB%B6%EF%BC%88%E5%B9%B6%E4%BF%AE%E6%94%B9%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9%EF%BC%89"><span class="toc-number">12.2.1.</span> <span class="toc-text">
+          第一步、添加axios插件（并修改一些内容）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E3%80%81%E5%BC%95%E7%94%A8axios%E5%B9%B6%E5%8F%91%E8%B5%B7get%E8%AF%B7%E6%B1%82"><span class="toc-number">12.3.</span> <span class="toc-text">
+          第二步、引用axios并发起get请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E3%80%81%E5%B0%86%E6%95%B0%E6%8D%AE%E6%98%BE%E7%A4%BA%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%AD"><span class="toc-number">12.4.</span> <span class="toc-text">
+          第三步、将数据显示在网页中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#template-HTML%E5%86%85%E5%AE%B9"><span class="toc-number">12.5.</span> <span class="toc-text">
+          template HTML内容</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">C'est la vie</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>何水浪</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: 'fJ4fFnieffDVKy4Jkn16aHdO-gzGzoHsz',
+    appKey: 'qfVo2CUC2pJ3udFzLFnd0GBM',
+    notify: true,
+    verify: true,
+    placeholder: '说点啥再走呗~爱你',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: false,
+    recordIP: false,
+    lang: '' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

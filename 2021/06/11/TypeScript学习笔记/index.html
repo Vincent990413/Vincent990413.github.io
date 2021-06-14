@@ -1,0 +1,731 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="TypeScript       TypeScript是微软开发的一款开源编程语言。                     TypeScript的安装       1npm install -g typescript  验证是否安装完毕： 1tsc -v                      TypeScript的编译过程        编写TypeS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript学习笔记">
+<meta property="og:url" content="https://vincent990413.github.io/2021/06/11/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="斯人若彩虹 遇上方知有">
+<meta property="og:description" content="TypeScript       TypeScript是微软开发的一款开源编程语言。                     TypeScript的安装       1npm install -g typescript  验证是否安装完毕： 1tsc -v                      TypeScript的编译过程        编写TypeS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210611123420827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210611124010933.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210611124842228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210611133515938.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210611125748176.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210611141518142.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210612162829210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210612163738401.png">
+<meta property="article:published_time" content="2021-06-11T06:01:35.000Z">
+<meta property="article:modified_time" content="2021-06-14T05:52:32.807Z">
+<meta property="article:author" content="何水浪">
+<meta property="article:tag" content="前端学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210611123420827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70"><title>TypeScript学习笔记 | 斯人若彩虹 遇上方知有</title><link ref="canonical" href="https://vincent990413.github.io/2021/06/11/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="斯人若彩虹 遇上方知有" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">斯人若彩虹 遇上方知有</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">TypeScript学习笔记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-06-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-06-14</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.5k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">27分</span></span></div></header><div class="post-body">
+        <h1 id="TypeScript"   >
+          <a href="#TypeScript" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h1>
+      <p>TypeScript是微软开发的一款开源编程语言。</p>
+
+        <h2 id="TypeScript的安装"   >
+          <a href="#TypeScript的安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript的安装" class="headerlink" title="TypeScript的安装"></a>TypeScript的安装</h2>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g typescript</span><br></pre></td></tr></table></div></figure>
+
+<p>验证是否安装完毕：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc -v</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="TypeScript的编译过程"   >
+          <a href="#TypeScript的编译过程" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript的编译过程" class="headerlink" title="TypeScript的编译过程"></a>TypeScript的编译过程</h2>
+      <ol>
+<li>编写TypeScript的.ts文件</li>
+<li>通过TypeScript Compiler编译器</li>
+<li><strong>转化成JavaScript文件</strong></li>
+</ol>
+
+        <h2 id="VS-Code-编译"   >
+          <a href="#VS-Code-编译" class="heading-link"><i class="fas fa-link"></i></a><a href="#VS-Code-编译" class="headerlink" title="VS Code 编译"></a>VS Code 编译</h2>
+      <ol>
+<li><p>创建.ts文件 <strong>typeScriptDemo.ts</strong></p>
+<figure class="highlight ts"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> message: <span class="built_in">string</span> = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(message);</span><br></pre></td></tr></table></div></figure></li>
+<li><p>利用<code>tsc</code>编译这个.ts文件，因为浏览器不支持。</p>
+<figure class="highlight cmd"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc typeScriptDemo.ts</span><br></pre></td></tr></table></div></figure></li>
+<li><p>会发现，在相同目录下，会生成对应的.js文件。</p>
+</li>
+</ol>
+<p><img   src="https://img-blog.csdnimg.cn/20210611123420827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br>4. 然后使用<code>node</code>命令来执行.js文件</p>
+<figure class="highlight cmd"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node typeScriptDemo.js</span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li>每次都要在控制台中敲<code>tsc</code>来手动编译，如何热部署呢？</li>
+</ul>
+<ol>
+<li><p>在当前目录创建<code>tsconfig.json</code></p>
+<figure class="highlight cmd"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc --init</span><br></pre></td></tr></table></div></figure></li>
+<li><p>在<code>tsconfig.json</code>中更改生成js的目标位置<br><img   src="https://img-blog.csdnimg.cn/20210611124010933.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<p><strong>可以看到，将对应的js文件输出到当前的js这个目录下：</strong></p>
+<ul>
+<li><p>现在创建一个新的.ts文件，然后点击VS Code菜单栏中的<code>Terminal</code></p>
+</li>
+<li><p>点击<code>Run Task</code></p>
+</li>
+<li><p>点击typescript 再点击<code>tsc:watch</code></p>
+</li>
+</ul>
+<p><img   src="https://img-blog.csdnimg.cn/20210611124842228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p>现在我们可以直接保存之后用<code>node .\js\demo.js</code>就可以运行js文件了。</p>
+<ul>
+<li>现在，我们写一个<code>.html</code>网页文件，来引用这个热部署的js文件。<br><img   src="https://img-blog.csdnimg.cn/20210611133515938.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"><br>现在运行ts文件并实时刷新，浏览器控制台即可得到结果。</li>
+</ul>
+<p><img   src="https://img-blog.csdnimg.cn/20210611125748176.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+
+        <h2 id="TypeScript的数据类型"   >
+          <a href="#TypeScript的数据类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript的数据类型" class="headerlink" title="TypeScript的数据类型"></a>TypeScript的数据类型</h2>
+      
+        <h3 id="boolean类型"   >
+          <a href="#boolean类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#boolean类型" class="headerlink" title="boolean类型"></a>boolean类型</h3>
+      <p><strong>TypeScript是强类型规范</strong>的，要求我们定义变量的同时，必须指定类型。</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> flag:boolean = <span class="literal">true</span>;</span><br></pre></td></tr></table></div></figure>
+
+<p>如果现在我们将flag赋值为字符串或者数值类型，会报错的。</p>
+
+        <h3 id="number类型"   >
+          <a href="#number类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#number类型" class="headerlink" title="number类型"></a>number类型</h3>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num:number = <span class="number">123</span>;</span><br></pre></td></tr></table></div></figure>
+
+<p>注意，TypeScript没有对<strong>整型</strong>或者<strong>浮点型</strong>做一个区分。</p>
+<p>同理，赋其他类型的值也会报错。</p>
+
+        <h3 id="string类型"   >
+          <a href="#string类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#string类型" class="headerlink" title="string类型"></a>string类型</h3>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str:number = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="array类型"   >
+          <a href="#array类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#array类型" class="headerlink" title="array类型"></a>array类型</h3>
+      <p>数组类型，在TypeScript中，我们<strong>建议指定类型</strong>的数组。</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 第一种方式</span></span><br><span class="line"><span class="keyword">let</span> arr:number[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]; <span class="comment">//指定类型为number的数组</span></span><br><span class="line"><span class="built_in">console</span>.log(arr);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 第二种方式 泛型的方式</span></span><br><span class="line"><span class="keyword">let</span> arr:<span class="built_in">Array</span>&lt;number&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="tuple元组"   >
+          <a href="#tuple元组" class="heading-link"><i class="fas fa-link"></i></a><a href="#tuple元组" class="headerlink" title="tuple元组"></a>tuple元组</h3>
+      <p>元组是数组的其中一种，我们可以<strong>指定多个不同类型的值</strong>。</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr:[string, number] = [<span class="string">&quot;张三&quot;</span>, <span class="number">98</span>];</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="枚举类型"   >
+          <a href="#枚举类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h3>
+      <p>枚举类型是<strong>用来解释说明某些符号的意义</strong>。</p>
+<p>比如：pay_status状态码。<br>0 代表未支付<br>1 代表支付成功<br>2 代表交易中</p>
+<p><strong>如果不赋值的话，如果上一个赋值了，就是上个值+1，否则为其在元组中的索引。</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enum Flag &#123;success=<span class="number">1</span>, error=-<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">let</span> f:Flag = Flag.success;</span><br><span class="line"><span class="built_in">console</span>.log(f) <span class="comment">//结果是1</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>这样下次我们看到相应的数字 就知道对应的含义！</strong></p>
+
+        <h3 id="any类型"   >
+          <a href="#any类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#any类型" class="headerlink" title="any类型"></a>any类型</h3>
+      <p>any代表任意一个类型，不指定类型，<strong>我们可以多次更改不同类型的值（类型不同也可以）。</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num:any = <span class="number">123</span>;<span class="comment">//执行这句后 当前num变量的类型是number</span></span><br><span class="line"></span><br><span class="line">num = <span class="literal">true</span>; <span class="comment">//指定这句后，当前num变量的类型是boolean</span></span><br></pre></td></tr></table></div></figure>
+<p>那么，any类型是什么应用呢？</p>
+<p>我们在js文件中<strong>定位DOM对象</strong>，由于ts中<strong>不存在对应的Object类型</strong></p>
+<p>因此我们可以赋为any</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> head:any = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;h1&#x27;</span>);</span><br><span class="line">head.style.color = <span class="string">&quot;red&quot;</span>;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="null与undefined类型"   >
+          <a href="#null与undefined类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#null与undefined类型" class="headerlink" title="null与undefined类型"></a>null与undefined类型</h3>
+      <p>在JS中我们知道，当我们对变量进行了<strong>定义但没有赋值，默认为undefined。</strong></p>
+<p><strong>根据TypeScript的强类型引用，我们必须赋值</strong>（我们也可以赋值number或者undefined）。</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> val:<span class="literal">undefined</span>; <span class="comment">//我们可以直接输出 结果为undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果要赋值 要赋值为number类型 如果直接输出 就是undefined</span></span><br><span class="line"><span class="keyword">let</span> val:number | <span class="literal">undefined</span>; </span><br></pre></td></tr></table></div></figure>
+
+<p>当一个元素可能是多个类型的时候，我们可以在定义的时候，指定。</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num:number|<span class="literal">null</span>|<span class="literal">undefined</span>;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="void类型"   >
+          <a href="#void类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#void类型" class="headerlink" title="void类型"></a>void类型</h3>
+      <p>如果方法没有返回值，我们就这么写：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;这个方法没有任何返回值！&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>否则，该方法返回什么，就写什么类型。</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSum</span>(<span class="params">x: number, y: number</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getSum(<span class="number">1</span>, <span class="number">2</span>));</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="never类型"   >
+          <a href="#never类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#never类型" class="headerlink" title="never类型"></a>never类型</h3>
+      <p>never类型就代表undefined或者null，或者从不会出现的值。</p>
+<p>基本不会用到：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n: never;</span><br><span class="line">n = (<span class="function">() =&gt;</span> &#123; </span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;error!&#x27;</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+
+        <h2 id="TypeScript的函数"   >
+          <a href="#TypeScript的函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript的函数" class="headerlink" title="TypeScript的函数"></a>TypeScript的函数</h2>
+      <ol>
+<li><p>函数声明法</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStringType</span>(<span class="params"></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Hello, World!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+<li><p>匿名函数法</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="function"><span class="keyword">function</span> (<span class="params"></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+<li><p>定义函数传参</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">introduce</span>(<span class="params">name: string</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Hello, My name is: &quot;</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(introduce(<span class="string">&quot;Vincent&quot;</span>));</span><br></pre></td></tr></table></div></figure></li>
+</ol>
+<ul>
+<li>另外，我们可以通过`而不是字符串的拼接来引用我们的变量。<strong>这种方法更常用！</strong><br><img   src="https://img-blog.csdnimg.cn/20210611141518142.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></li>
+</ul>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">introduce</span>(<span class="params">name: string</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Hello, My name is <span class="subst">$&#123;name&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(introduce(<span class="string">&quot;Vincent&quot;</span>));</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="可选参数（放在非可选参数的后面）"   >
+          <a href="#可选参数（放在非可选参数的后面）" class="heading-link"><i class="fas fa-link"></i></a><a href="#可选参数（放在非可选参数的后面）" class="headerlink" title="可选参数（放在非可选参数的后面）"></a>可选参数（放在非可选参数的后面）</h3>
+      <p><strong>对于，实参与形参如果不一样，必须指定可选参数。</strong></p>
+<p>也就是说，如果传某个可选参数，和如果不传分别都要做处理。</p>
+<p>我们在对应的参数后面紧跟一个<strong>问号即可</strong>。</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">introduce</span>(<span class="params">name:string, age?:number</span>):<span class="title">string</span></span>&#123;</span><br><span class="line">    <span class="comment">//如果调用的时候 提供age参数</span></span><br><span class="line">    <span class="keyword">if</span>(age)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`Hello, my name is: <span class="subst">$&#123;name&#125;</span>, and my age is : <span class="subst">$&#123;age&#125;</span>!`</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`Hello, my name is: <span class="subst">$&#123;name&#125;</span>!`</span>;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(introduce(<span class="string">&#x27;Vincent&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(introduce(<span class="string">&#x27;Vincent&#x27;</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></div></figure>
+<ul>
+<li>注意，<strong>可选参数必须配置到所有参数的最后面！</strong></li>
+<li>
+        <h3 id="默认参数"   >
+          <a href="#默认参数" class="heading-link"><i class="fas fa-link"></i></a><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">introduce</span>(<span class="params">name: string, age: number = <span class="number">18</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果调用的时候 提供age参数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">`Hello, my name is: <span class="subst">$&#123;name&#125;</span>, and my age is : <span class="subst">$&#123;age&#125;</span>!`</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(introduce(<span class="string">&#x27;Vincent&#x27;</span>)) <span class="comment">//这里我们age 会打印出18</span></span><br><span class="line"><span class="built_in">console</span>.log(introduce(<span class="string">&#x27;Vincent&#x27;</span>, <span class="number">20</span>))</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h3 id="三点运算符"   >
+          <a href="#三点运算符" class="heading-link"><i class="fas fa-link"></i></a><a href="#三点运算符" class="headerlink" title="三点运算符"></a>三点运算符</h3>
+      <ul>
+<li>三点运算符，用于接收传过来的不确定的值。</li>
+</ul>
+<p>有些时候，我们传过来的参数可能是<strong>三个数</strong>也可能是<strong>四个数</strong>，我们利用三点运算符，可以将<strong>不确定个数的这些数全部装进一个相同类型的数组中</strong>。从而进行相应的处理！</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...result: number[]</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; result.length; i++) &#123;</span><br><span class="line">        sum += result[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)) <span class="comment">//我们将1,2,3都装进result中</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)) <span class="comment">//我们将1,2,3,4都装进result中</span></span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="函数重载"   >
+          <a href="#函数重载" class="heading-link"><i class="fas fa-link"></i></a><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h3>
+      <p><strong>重载是指，两个或者以上个同名函数，但是他们的参数不一样（包括参数个数相同但类型不同，或者参数个数不同）。</strong></p>
+<p>TypeScript中的重载，与ES5或者Java中的重载不太相同。</p>
+
+        <h4 id="参数个数相同，只是类型不同时"   >
+          <a href="#参数个数相同，只是类型不同时" class="heading-link"><i class="fas fa-link"></i></a><a href="#参数个数相同，只是类型不同时" class="headerlink" title="参数个数相同，只是类型不同时"></a>参数个数相同，只是类型不同时</h4>
+      <ol>
+<li><p>我们首先定义所有的情况（包括列出不同的参数情况）</p>
+</li>
+<li><p>实现一个方法，但是要写出根据不同参数来实现不同的情况。</p>
+</li>
+</ol>
+<ul>
+<li><strong>关键代码是 if( typeof param === “” )</strong></li>
+</ul>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明第一种情况</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">myName: string</span>): <span class="title">string</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//声明第二种情况</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">myAge: number</span>): <span class="title">number</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//写函数 写出重载结果</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">param: any</span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> param === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`我的名字是：<span class="subst">$&#123;param&#125;</span>`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`我的年龄是：<span class="subst">$&#123;param&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getInfo(<span class="string">&#x27;Vincent&#x27;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(getInfo(<span class="number">22</span>));</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="当参数个数不同时"   >
+          <a href="#当参数个数不同时" class="heading-link"><i class="fas fa-link"></i></a><a href="#当参数个数不同时" class="headerlink" title="当参数个数不同时"></a>当参数个数不同时</h4>
+      <p>同样，也是首先声明所有情况。然后涉及到可选参数！</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">myName: string</span>): <span class="title">string</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">myName: string, age: number</span>): <span class="title">string</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//因为参数个数不同 所以需要声明可选参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">param1: any, param2?: any</span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果提供了可选参数</span></span><br><span class="line">    <span class="keyword">if</span> (param2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`Hello, my name is <span class="subst">$&#123;param1&#125;</span>, and my age is <span class="subst">$&#123;param2&#125;</span>`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`Hello, my name is <span class="subst">$&#123;param1&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getInfo(<span class="string">&#x27;Vincent&#x27;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(getInfo(<span class="string">&#x27;Vincent&#x27;</span>, <span class="number">22</span>));</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="箭头函数"   >
+          <a href="#箭头函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3>
+      <ul>
+<li><strong>注意，箭头函数里面的this不是外面的this。</strong></li>
+</ul>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num: number = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> _this: any = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// alert(`$&#123;num&#125;`);</span></span><br><span class="line">    alert(_this.num) </span><br><span class="line">	<span class="comment">//这两种方法都能打印出setTimeout方法外的变量</span></span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></div></figure>
+
+
+
+        <h2 id="TypeScript的类"   >
+          <a href="#TypeScript的类" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript的类" class="headerlink" title="TypeScript的类"></a>TypeScript的类</h2>
+      
+        <h3 id="（回顾）ES5-中的类与对象"   >
+          <a href="#（回顾）ES5-中的类与对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#（回顾）ES5-中的类与对象" class="headerlink" title="（回顾）ES5 中的类与对象"></a>（回顾）ES5 中的类与对象</h3>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//es5 中的类与对象以及方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = <span class="string">&quot;张三&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.age = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//原型链创造属性+方法</span></span><br><span class="line">Person.prototype.info = <span class="string">&quot;信息&quot;</span>;</span><br><span class="line">Person.prototype.work = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;我是&quot;</span> + <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="string">&quot;我在工作！&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//静态方法</span></span><br><span class="line">Person.getInfo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创造对象</span></span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(obj.name + <span class="string">&quot;:&quot;</span> + obj.age);</span><br><span class="line"></span><br><span class="line"><span class="comment">//静态方法</span></span><br><span class="line">Person.getInfo();</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="TypeScript中"   >
+          <a href="#TypeScript中" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript中" class="headerlink" title="TypeScript中"></a>TypeScript中</h3>
+      
+        <h4 id="类以及对象的实例化"   >
+          <a href="#类以及对象的实例化" class="heading-link"><i class="fas fa-link"></i></a><a href="#类以及对象的实例化" class="headerlink" title="类以及对象的实例化"></a>类以及对象的实例化</h4>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//属性</span></span><br><span class="line">    <span class="attr">myName</span>: string; <span class="comment">//前面省略了public关键词</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">myName: string</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.myName = myName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setMyName(myName: string): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.myName = myName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">getMyName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.myName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getInfo(): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`您好，我是<span class="subst">$&#123;<span class="built_in">this</span>.myName&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实例化对象</span></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> Person(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">p.getInfo();</span><br><span class="line">p.setMyName(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">p.getInfo();</span><br></pre></td></tr></table></div></figure>
+
+        <h4 id="继承"   >
+          <a href="#继承" class="heading-link"><i class="fas fa-link"></i></a><a href="#继承" class="headerlink" title="继承"></a>继承</h4>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name: string</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name); </span><br><span class="line">        <span class="comment">//调用父类的构造函数 从而继承父类的属性与方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stu = <span class="keyword">new</span> Student(<span class="string">&quot;学生&quot;</span>);</span><br><span class="line">stu.getInfo();</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>注意，当子类中的方法名与其父类相同，那么会执行子类的方法。</strong></p>
+
+        <h4 id="类里面的修饰符"   >
+          <a href="#类里面的修饰符" class="heading-link"><i class="fas fa-link"></i></a><a href="#类里面的修饰符" class="headerlink" title="类里面的修饰符"></a>类里面的修饰符</h4>
+      <ol>
+<li><p>public 公有：表示任何地方都能访问<strong>（类里外、子类）</strong></p>
+</li>
+<li><p>private 私有：表示<strong>类里面可以访问，而子类与类外部无法访问。</strong></p>
+</li>
+<li><p>protected 保护：表示在<strong>类里面以及子类里面才能访问，类外无法访问。</strong></p>
+</li>
+</ol>
+<ul>
+<li>注意，如果属性不加修饰符，默认为公有public。</li>
+</ul>
+
+        <h4 id="静态属性与方法"   >
+          <a href="#静态属性与方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#静态属性与方法" class="headerlink" title="静态属性与方法"></a>静态属性与方法</h4>
+      <ul>
+<li>注意，静态方法中，是不能调用静态属性的。</li>
+</ul>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//属性</span></span><br><span class="line">    <span class="attr">myName</span>: string; <span class="comment">//前面省略了public关键词</span></span><br><span class="line">    myAge: number;</span><br><span class="line">    <span class="keyword">static</span> mySex: string = <span class="string">&quot;男&quot;</span>; <span class="comment">//静态方法</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">myName: string, myAge: number</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.myName = myName;</span><br><span class="line">        <span class="built_in">this</span>.myAge = myAge;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//静态方法</span></span><br><span class="line">    <span class="keyword">static</span> getInfo(): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;Person.mySex&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.getInfo();</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="多态"   >
+          <a href="#多态" class="heading-link"><i class="fas fa-link"></i></a><a href="#多态" class="headerlink" title="多态"></a>多态</h4>
+      <ul>
+<li>多态指的是，<strong>父类声明一个方法但不实现，让子类来实现，并且每个子类都有不同的实现方法。</strong></li>
+</ul>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//属性</span></span><br><span class="line">    <span class="attr">myName</span>: string;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">myName: string</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.myName = myName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">work</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name: string</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">work</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;我去上学！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> Person(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">p.work();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stu = <span class="keyword">new</span> Student(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">stu.work();</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="抽象类"   >
+          <a href="#抽象类" class="heading-link"><i class="fas fa-link"></i></a><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4>
+      <ul>
+<li>抽象类以及抽象函数，一般用于定义标准。<strong>其子类必须包含这些含有abstract的函数。</strong></li>
+</ul>
+<p><strong>抽象类是不能直接实例化的。</strong></p>
+<p>当然，抽象类可以具有构造函数以及非抽象函数的。<strong>但是对于那些抽象函数，其子类是必须要实现的。</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个抽象类以及一个抽象方法</span></span><br><span class="line">abstract <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    abstract eat(): <span class="keyword">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    eat(): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;这是狗，实现eat方法。&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    eat(): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;这是猫，实现eat方法。&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dog= <span class="keyword">new</span> Dog();</span><br><span class="line"><span class="keyword">let</span> cat= <span class="keyword">new</span> Cat();</span><br><span class="line"></span><br><span class="line">dog.eat();</span><br><span class="line">cat.eat();</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="接口"   >
+          <a href="#接口" class="heading-link"><i class="fas fa-link"></i></a><a href="#接口" class="headerlink" title="接口"></a>接口</h4>
+      <p><strong>函数型接口：</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//定义一个接口 以及相应的规范</span></span><br><span class="line">interface encrypt &#123;</span><br><span class="line">    (key: string, <span class="attr">value</span>: string): string;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//实现这个接口 必须要符合规范</span></span><br><span class="line"><span class="keyword">var</span> md5: encrypt = <span class="function"><span class="keyword">function</span> (<span class="params">key: string, value: string</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> key + value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用这个接口</span></span><br><span class="line"><span class="built_in">console</span>.log(md5(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;zhangsan&#x27;</span>))</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="TypeScript中的泛型"   >
+          <a href="#TypeScript中的泛型" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript中的泛型" class="headerlink" title="TypeScript中的泛型"></a>TypeScript中的泛型</h3>
+      <ul>
+<li>泛型，即泛指的值，不具体固定的值，<strong>你传入什么类型，我就用什么类型来处理。</strong></li>
+</ul>
+<p>如果简单的话，可以使用<code>any</code>类型来处理。但是也存在一个隐患，就是<strong>any代表任意类型，它不强制类型。</strong> </p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>&lt;<span class="title">T</span>&gt;(<span class="params">value: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getData&lt;string&gt;(<span class="string">&#x27;Hello, World!&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(getData&lt;number&gt;(<span class="number">100</span>));</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="泛型类"   >
+          <a href="#泛型类" class="heading-link"><i class="fas fa-link"></i></a><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassGetFirstItem</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    public list: T[] = [];</span><br><span class="line"></span><br><span class="line">    add(value: T): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.list.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getFirstItem(): T &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.list[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getList(): string &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`数组是<span class="subst">$&#123;<span class="built_in">this</span>.list&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cla = <span class="keyword">new</span> ClassGetFirstItem&lt;number&gt;();</span><br><span class="line">cla.add(<span class="number">1</span>);</span><br><span class="line">cla.add(<span class="number">1</span>);</span><br><span class="line">cla.add(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(cla.getList());</span><br><span class="line"><span class="built_in">console</span>.log(cla.getFirstItem());</span><br></pre></td></tr></table></div></figure>
+
+<p>当然，我们也可以<code>let cla = new ClassGetFirstItem&lt;string&gt;();</code>从而声明类型为string类型。</p>
+
+        <h3 id="TypeScript中的模块"   >
+          <a href="#TypeScript中的模块" class="heading-link"><i class="fas fa-link"></i></a><a href="#TypeScript中的模块" class="headerlink" title="TypeScript中的模块"></a>TypeScript中的模块</h3>
+      <p><img   src="https://img-blog.csdnimg.cn/20210612162829210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ul>
+<li>也就是说，我们首先export导出某些变量、函数甚至类，然后在想用的地方去import这个模块，从而能够获取到想要的变量、函数甚至类。</li>
+</ul>
+<p><strong>由于浏览器不能直接获取Js文件中的export。我们用node来看看。</strong></p>
+<ol>
+<li><p>demo.ts中export导出数据</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getDataInfo</span>(<span class="params"></span>): <span class="title">any</span>[] </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">username</span>: <span class="string">&quot;root&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">password</span>: <span class="string">&quot;123456&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+<li><p>main.ts中import这个function以及数据</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getDataInfo &#125; <span class="keyword">from</span> <span class="string">&#x27;./demo&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getDataInfo());</span><br></pre></td></tr></table></div></figure></li>
+<li><p>使用<code>node</code>来运行对应的main.js文件查看</p>
+<figure class="highlight cmd"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> js </span><br><span class="line"></span><br><span class="line">node main.js</span><br></pre></td></tr></table></div></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210612163738401.png" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<p>export default 指的是默认导出，只能有一个默认导出。</p>
+<p>比如</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件末尾</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> getData;</span><br><span class="line"></span><br><span class="line"><span class="comment">//另一个想要引入getData的文件</span></span><br><span class="line"><span class="keyword">import</span> getData <span class="keyword">from</span> <span class="string">&#x27;.../&#x27;</span>;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="装饰器"   >
+          <a href="#装饰器" class="heading-link"><i class="fas fa-link"></i></a><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1>
+      <ul>
+<li>装饰器就是一个方法，可以<strong>为某个类动态注入。</strong></li>
+</ul>
+
+        <h2 id="类装饰器"   >
+          <a href="#类装饰器" class="heading-link"><i class="fas fa-link"></i></a><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h2>
+      <p><strong>类装饰器应用于类的构造函数，可以用来监视，修改或者替换类的定义，传入一个参数。</strong></p>
+
+        <h3 id="普通装饰器"   >
+          <a href="#普通装饰器" class="heading-link"><i class="fas fa-link"></i></a><a href="#普通装饰器" class="headerlink" title="普通装饰器"></a>普通装饰器</h3>
+      <p>不修改类的前提下，动态修改类的属性与方法：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//装饰器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logClass</span>(<span class="params">params: any</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//params 就是当前类（我们就可以扩展这个类了）</span></span><br><span class="line">    <span class="built_in">console</span>.log(params);</span><br><span class="line"></span><br><span class="line">    params.prototype.apiUrl = <span class="string">&quot;xxx&quot;</span>;</span><br><span class="line">    params.prototype.run = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;我是run方法！&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@logClass</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> http: any = <span class="keyword">new</span> HttpClient();</span><br><span class="line"><span class="built_in">console</span>.log(http.apiUrl); <span class="comment">//打印动态扩展的属性</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="装饰器工厂"   >
+          <a href="#装饰器工厂" class="heading-link"><i class="fas fa-link"></i></a><a href="#装饰器工厂" class="headerlink" title="装饰器工厂"></a>装饰器工厂</h3>
+      <ul>
+<li>装饰器工厂，可以在使用某个装饰器的同时，传入参数进去。<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//装饰器</span></span><br><span class="line"><span class="comment">//工厂装饰器 可以接收传过来的参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logClass</span>(<span class="params">params: string</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target: any</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;target:&quot;</span> + target);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;params:&quot;</span> + params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个地方 把string类型的hello变量赋给了params </span></span><br><span class="line"><span class="comment">//而target则代表当前的类</span></span><br><span class="line">@logClass(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们实例化的同时 就会执行装饰器中的return中的方法体</span></span><br><span class="line"><span class="keyword">let</span> http: any = <span class="keyword">new</span> HttpClient();</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h2 id="属性装饰器"   >
+          <a href="#属性装饰器" class="heading-link"><i class="fas fa-link"></i></a><a href="#属性装饰器" class="headerlink" title="属性装饰器"></a>属性装饰器</h2>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logProperty</span>(<span class="params">params: any</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target: any, attr: any</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(attr);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//target相当于this 修改attr为传过来的参数</span></span><br><span class="line">        target[attr] = params;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    @logProperty(<span class="string">&quot;new Attr&quot;</span>)</span><br><span class="line">    public url: any | <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">    getData(): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.url);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> http = <span class="keyword">new</span> HttpClient();</span><br><span class="line">http.getData();</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="方法装饰器"   >
+          <a href="#方法装饰器" class="heading-link"><i class="fas fa-link"></i></a><a href="#方法装饰器" class="headerlink" title="方法装饰器"></a>方法装饰器</h2>
+      <figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logMethod</span>(<span class="params">params: any</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//target代表当前实例对象 methodName代表方法名</span></span><br><span class="line">    <span class="comment">//desc 代表方法的描述</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target: any, methodName: any, desc: any</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(target);</span><br><span class="line">        <span class="built_in">console</span>.log(methodName);</span><br><span class="line">        <span class="built_in">console</span>.log(desc);</span><br><span class="line">        target.getData = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;修改！&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        target.getData();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">    @logMethod(<span class="string">&quot;www.baidu.com&quot;</span>) <span class="comment">//传入参数</span></span><br><span class="line">    getData(): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;getData&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> http = <span class="keyword">new</span> HttpClient();</span><br></pre></td></tr></table></div></figure></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://vincent990413.github.io">何水浪</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://vincent990413.github.io/2021/06/11/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://vincent990413.github.io/2021/06/11/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://vincent990413.github.io/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">前端学习笔记</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2021/06/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82/"><span class="paginator-prev__text">设计模式学习_抽象工厂</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TypeScript"><span class="toc-number">1.</span> <span class="toc-text">
+          TypeScript</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">
+          TypeScript的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">
+          TypeScript的编译过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VS-Code-%E7%BC%96%E8%AF%91"><span class="toc-number">1.3.</span> <span class="toc-text">
+          VS Code 编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">
+          TypeScript的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#boolean%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">
+          boolean类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#number%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.2.</span> <span class="toc-text">
+          number类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.3.</span> <span class="toc-text">
+          string类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#array%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.4.</span> <span class="toc-text">
+          array类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tuple%E5%85%83%E7%BB%84"><span class="toc-number">1.4.5.</span> <span class="toc-text">
+          tuple元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.6.</span> <span class="toc-text">
+          枚举类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#any%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.7.</span> <span class="toc-text">
+          any类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null%E4%B8%8Eundefined%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.8.</span> <span class="toc-text">
+          null与undefined类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#void%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.9.</span> <span class="toc-text">
+          void类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#never%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.10.</span> <span class="toc-text">
+          never类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">
+          TypeScript的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0%EF%BC%88%E6%94%BE%E5%9C%A8%E9%9D%9E%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0%E7%9A%84%E5%90%8E%E9%9D%A2%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">
+          可选参数（放在非可选参数的后面）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="toc-number">1.5.2.</span> <span class="toc-text">
+          默认参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%82%B9%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.5.3.</span> <span class="toc-text">
+          三点运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-number">1.5.4.</span> <span class="toc-text">
+          函数重载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9B%B8%E5%90%8C%EF%BC%8C%E5%8F%AA%E6%98%AF%E7%B1%BB%E5%9E%8B%E4%B8%8D%E5%90%8C%E6%97%B6"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">
+          参数个数相同，只是类型不同时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E5%8F%82%E6%95%B0%E4%B8%AA%E6%95%B0%E4%B8%8D%E5%90%8C%E6%97%B6"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">
+          当参数个数不同时</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.5.</span> <span class="toc-text">
+          箭头函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%B1%BB"><span class="toc-number">1.6.</span> <span class="toc-text">
+          TypeScript的类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9B%9E%E9%A1%BE%EF%BC%89ES5-%E4%B8%AD%E7%9A%84%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.6.1.</span> <span class="toc-text">
+          （回顾）ES5 中的类与对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TypeScript%E4%B8%AD"><span class="toc-number">1.6.2.</span> <span class="toc-text">
+          TypeScript中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E4%BB%A5%E5%8F%8A%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">
+          类以及对象的实例化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">
+          继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E9%87%8C%E9%9D%A2%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">1.6.2.3.</span> <span class="toc-text">
+          类里面的修饰符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.2.4.</span> <span class="toc-text">
+          静态属性与方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">1.6.2.5.</span> <span class="toc-text">
+          多态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-number">1.6.2.6.</span> <span class="toc-text">
+          抽象类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.6.2.7.</span> <span class="toc-text">
+          接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B"><span class="toc-number">1.6.3.</span> <span class="toc-text">
+          TypeScript中的泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB"><span class="toc-number">1.6.3.1.</span> <span class="toc-text">
+          泛型类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TypeScript%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.6.4.</span> <span class="toc-text">
+          TypeScript中的模块</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">
+          装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">
+          类装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">
+          普通装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B7%A5%E5%8E%82"><span class="toc-number">2.1.2.</span> <span class="toc-text">
+          装饰器工厂</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">
+          属性装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">
+          方法装饰器</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">C'est la vie</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>何水浪</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: 'fJ4fFnieffDVKy4Jkn16aHdO-gzGzoHsz',
+    appKey: 'qfVo2CUC2pJ3udFzLFnd0GBM',
+    notify: true,
+    verify: true,
+    placeholder: '说点啥再走呗~爱你',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: false,
+    recordIP: false,
+    lang: '' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

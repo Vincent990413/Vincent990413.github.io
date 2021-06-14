@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="职员类                           构造函数                           set get 方法       123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++面向对象基础">
+<meta property="og:url" content="https://vincent990413.github.io/2021/03/17/C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="斯人若彩虹 遇上方知有">
+<meta property="og:description" content="职员类                           构造函数                           set get 方法       123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-17T11:24:49.000Z">
+<meta property="article:modified_time" content="2021-06-01T15:21:23.000Z">
+<meta property="article:author" content="何水浪">
+<meta property="article:tag" content="编程语言">
+<meta name="twitter:card" content="summary"><title>C++面向对象基础 | 斯人若彩虹 遇上方知有</title><link ref="canonical" href="https://vincent990413.github.io/2021/03/17/C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="斯人若彩虹 遇上方知有" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">斯人若彩虹 遇上方知有</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">C++面向对象基础</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-17</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-06-01</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">753</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">6分</span></span></div></header><div class="post-body">
+        <h1 id="职员类"   >
+          <a href="#职员类" class="heading-link"><i class="fas fa-link"></i></a><a href="#职员类" class="headerlink" title="职员类"></a>职员类</h1>
+      
+        <h2 id="构造函数"   >
+          <a href="#构造函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2>
+      
+        <h2 id="set-get-方法"   >
+          <a href="#set-get-方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#set-get-方法" class="headerlink" title="set get 方法"></a>set get 方法</h2>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个职员类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>&#123;</span></span><br><span class="line">	<span class="comment">//属性与方法</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>: <span class="comment">//公共方法</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//构造函数 有多个构造函数后 </span></span><br><span class="line">		<span class="comment">//默认的空构造函数 会被覆盖 建议加上 </span></span><br><span class="line">		<span class="built_in">Employee</span>()&#123;&#125;	 </span><br><span class="line">		<span class="built_in">Employee</span>(string name, string company, <span class="keyword">int</span> age);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Set方法</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">setName</span><span class="params">(string name)</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">setCompany</span><span class="params">(string company)</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//Get方法</span></span><br><span class="line">		<span class="function">string <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line">		<span class="function">string <span class="title">getCompany</span><span class="params">()</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">introduce</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="comment">//私有属性 在类的外部不可直接调用</span></span><br><span class="line">		<span class="comment">//注意！不管是接口还是属性 还是方法</span></span><br><span class="line">		<span class="comment">//C++中 不明确指出public还是protected的 </span></span><br><span class="line">		<span class="comment">//默认是“private”！！！！</span></span><br><span class="line">		</span><br><span class="line">		string Name; <span class="comment">//姓名</span></span><br><span class="line">		string Company; <span class="comment">//所就职的公司</span></span><br><span class="line">		<span class="keyword">int</span> Age; <span class="comment">//年龄		</span></span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="comment">//利用域名符:: 实现相应的方法 </span></span><br><span class="line"><span class="comment">//注意：实现相应方法的形参 必须对应相应的函数声明</span></span><br><span class="line"><span class="comment">//注意：使用this指针时 内部使用-&gt; 在主函数中的对象 使用.</span></span><br><span class="line">Employee::<span class="built_in">Employee</span>(string name, string company, <span class="keyword">int</span> age)&#123;</span><br><span class="line">	<span class="comment">//this指针 代表当前任意被调用的这个对象	</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;Name = name;</span><br><span class="line">	<span class="keyword">this</span>-&gt;Company = company;</span><br><span class="line">	<span class="keyword">this</span>-&gt;Age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Employee::setName</span><span class="params">(string name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;Name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">Employee::getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>-&gt;Name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Employee::setCompany</span><span class="params">(string company)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;Company = company;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">Employee::getCompany</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>-&gt;Company;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Employee::setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;Age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Employee::getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>-&gt;Age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Employee::introduce</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Name-&gt;&quot;</span> &lt;&lt; Name &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="string">&quot;Company-&gt;&quot;</span> </span><br><span class="line">	&lt;&lt; Company &lt;&lt; <span class="string">&quot;,Age-&gt;&quot;</span> &lt;&lt;Age&lt;&lt;endl; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	string name = <span class="string">&quot;Vincent&quot;</span>;</span><br><span class="line">	string company = <span class="string">&quot;Tecent&quot;</span>;</span><br><span class="line">	<span class="keyword">int</span> age = <span class="number">21</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//利用构造函数 new一个新的职员对象</span></span><br><span class="line">	Employee e1 = <span class="built_in">Employee</span>(name, company, age);</span><br><span class="line">	e1.<span class="built_in">introduce</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="实现虚拟接口"   >
+          <a href="#实现虚拟接口" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现虚拟接口" class="headerlink" title="实现虚拟接口"></a>实现虚拟接口</h1>
+      
+        <h2 id="职员具有实现接口的功能"   >
+          <a href="#职员具有实现接口的功能" class="heading-link"><i class="fas fa-link"></i></a><a href="#职员具有实现接口的功能" class="headerlink" title="职员具有实现接口的功能"></a>职员具有实现接口的功能</h2>
+      
+        <h3 id="1-定义一个接口（Virtual-虚拟方法）"   >
+          <a href="#1-定义一个接口（Virtual-虚拟方法）" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-定义一个接口（Virtual-虚拟方法）" class="headerlink" title="1.定义一个接口（Virtual 虚拟方法）"></a>1.定义一个接口（Virtual 虚拟方法）</h3>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AbstractEmployee</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">AskForPromotion</span><span class="params">()</span></span>=<span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="2-声明某个类实现-这个AbstractClass"   >
+          <a href="#2-声明某个类实现-这个AbstractClass" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-声明某个类实现-这个AbstractClass" class="headerlink" title="2.声明某个类实现 :这个AbstractClass"></a>2.声明某个类实现 :这个AbstractClass</h3>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>:</span>AbstractEmployee&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="comment">//.....公共方法</span></span><br><span class="line">		<span class="comment">//将接口中的方法 作为实现这个方法的类的成员函数</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">AskForPromotion</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="comment">//.....私有属性</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="3-具体实现函数"   >
+          <a href="#3-具体实现函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-具体实现函数" class="headerlink" title="3.具体实现函数"></a>3.具体实现函数</h3>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Employee::AskForPromotion</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//具体方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="程序员（Employee类的子类-继承Employee）"   >
+          <a href="#程序员（Employee类的子类-继承Employee）" class="heading-link"><i class="fas fa-link"></i></a><a href="#程序员（Employee类的子类-继承Employee）" class="headerlink" title="程序员（Employee类的子类 继承Employee）"></a>程序员（Employee类的子类 继承Employee）</h1>
+      
+        <h3 id="1-程序员类具有自己特有的构造函数-amp-成员函数"   >
+          <a href="#1-程序员类具有自己特有的构造函数-amp-成员函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-程序员类具有自己特有的构造函数-amp-成员函数" class="headerlink" title="1.程序员类具有自己特有的构造函数&amp;成员函数"></a>1.程序员类具有自己特有的构造函数&amp;成员函数</h3>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Developer</span>:</span> Employee&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="comment">//别忘了默认的构造函数 以及声明程序员类特有的构造函数</span></span><br><span class="line">		<span class="built_in">Developer</span>()&#123;&#125;</span><br><span class="line">		<span class="built_in">Developer</span>(string name, string company, <span class="keyword">int</span> age, string fav);</span><br><span class="line">		<span class="comment">//继承Employee的同时 Developer类具有Employee的公共方法</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Set函数与Get函数 是Developer独有的方法</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">setFavProgLang</span><span class="params">(string language)</span></span>;</span><br><span class="line">		<span class="function">string <span class="title">getFavProgLang</span><span class="params">()</span></span>; </span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		string FavProgLang; <span class="comment">//最喜欢的编程语言 </span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="2-实现这个构造函数以及成员函数-Empl…-表示由其父类来实现前三个参数"   >
+          <a href="#2-实现这个构造函数以及成员函数-Empl…-表示由其父类来实现前三个参数" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-实现这个构造函数以及成员函数-Empl…-表示由其父类来实现前三个参数" class="headerlink" title="2.实现这个构造函数以及成员函数(:Empl… 表示由其父类来实现前三个参数)"></a>2.实现这个构造函数以及成员函数(:Empl… 表示由其父类来实现前三个参数)</h3>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Developer::<span class="built_in">Developer</span>(string name, string company, <span class="keyword">int</span> age, string fav)</span><br><span class="line">	:<span class="built_in">Employee</span>(name, company, age)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;FavProgLang = fav;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>注意：父类中的Name，Company，Age 在其子类Developer中都是不可获取的（Inaccessible）</strong><br><strong>因为，这些属性都是private 私有的，在类外任何地方都不能获取！</strong><br><strong>除非我们修改这些属性的修饰符 修改成protected</strong></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://vincent990413.github.io">何水浪</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://vincent990413.github.io/2021/03/17/C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">https://vincent990413.github.io/2021/03/17/C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://vincent990413.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/03/19/C-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">C++管理系统</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/17/SpringMVC/"><span class="paginator-prev__text">SpringMVC学习笔记(所有代码FROM SIKI学院)</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%8C%E5%91%98%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">
+          职员类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">
+          构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set-get-%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">
+          set get 方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.</span> <span class="toc-text">
+          实现虚拟接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%8C%E5%91%98%E5%85%B7%E6%9C%89%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.</span> <span class="toc-text">
+          职员具有实现接口的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%8E%A5%E5%8F%A3%EF%BC%88Virtual-%E8%99%9A%E6%8B%9F%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">
+          1.定义一个接口（Virtual 虚拟方法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A3%B0%E6%98%8E%E6%9F%90%E4%B8%AA%E7%B1%BB%E5%AE%9E%E7%8E%B0-%E8%BF%99%E4%B8%AAAbstractClass"><span class="toc-number">2.1.2.</span> <span class="toc-text">
+          2.声明某个类实现 :这个AbstractClass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.3.</span> <span class="toc-text">
+          3.具体实现函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%88Employee%E7%B1%BB%E7%9A%84%E5%AD%90%E7%B1%BB-%E7%BB%A7%E6%89%BFEmployee%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">
+          程序员（Employee类的子类 继承Employee）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A8%8B%E5%BA%8F%E5%91%98%E7%B1%BB%E5%85%B7%E6%9C%89%E8%87%AA%E5%B7%B1%E7%89%B9%E6%9C%89%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-amp-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">3.0.1.</span> <span class="toc-text">
+          1.程序员类具有自己特有的构造函数&amp;成员函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E8%BF%99%E4%B8%AA%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%BB%A5%E5%8F%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0-Empl%E2%80%A6-%E8%A1%A8%E7%A4%BA%E7%94%B1%E5%85%B6%E7%88%B6%E7%B1%BB%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%89%8D%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="toc-number">3.0.2.</span> <span class="toc-text">
+          2.实现这个构造函数以及成员函数(:Empl… 表示由其父类来实现前三个参数)</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">C'est la vie</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>何水浪</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: 'fJ4fFnieffDVKy4Jkn16aHdO-gzGzoHsz',
+    appKey: 'qfVo2CUC2pJ3udFzLFnd0GBM',
+    notify: true,
+    verify: true,
+    placeholder: '说点啥再走呗~爱你',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: false,
+    recordIP: false,
+    lang: '' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

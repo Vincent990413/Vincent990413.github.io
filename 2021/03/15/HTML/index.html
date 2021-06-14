@@ -1,0 +1,928 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="HTMLHyperText Markup Language              &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;  前端开发是创建Web页面或app等前端界面呈现给用户的过程， 通过HTML，CSS及JavaScript以及衍生出来的各种技术、框架、解决方案，来实现互联网产品的用户界面交互。 它从网页制作演变而来，名称上有很明显的时代特征。在互联网的演化进程中，网页制作是W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML学习笔记">
+<meta property="og:url" content="https://vincent990413.github.io/2021/03/15/HTML/index.html">
+<meta property="og:site_name" content="斯人若彩虹 遇上方知有">
+<meta property="og:description" content="HTMLHyperText Markup Language              &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;  前端开发是创建Web页面或app等前端界面呈现给用户的过程， 通过HTML，CSS及JavaScript以及衍生出来的各种技术、框架、解决方案，来实现互联网产品的用户界面交互。 它从网页制作演变而来，名称上有很明显的时代特征。在互联网的演化进程中，网页制作是W">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-15T08:38:23.000Z">
+<meta property="article:modified_time" content="2021-05-06T11:45:44.000Z">
+<meta property="article:author" content="何水浪">
+<meta property="article:tag" content="前端学习笔记">
+<meta name="twitter:card" content="summary"><title>HTML学习笔记 | 斯人若彩虹 遇上方知有</title><link ref="canonical" href="https://vincent990413.github.io/2021/03/15/HTML/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="斯人若彩虹 遇上方知有" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">斯人若彩虹 遇上方知有</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">HTML学习笔记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-15</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-05-06</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.9k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">18分</span></span></div></header><div class="post-body"><div id="html">
+<h2>HTML<small>HyperText Markup Language</small></h2>
+<blockquote>         
+<p>
+<i class="fa fa-quote-left"></i> 
+&nbsp;&nbsp;&nbsp;&nbsp; 
+前端开发是创建Web页面或app等前端界面呈现给用户的过程，
+通过HTML，CSS及JavaScript以及衍生出来的各种技术、框架、解决方案，来实现互联网产品的用户界面交互。
+它从网页制作演变而来，名称上有很明显的时代特征。在互联网的演化进程中，网页制作是Web1.0时代的产物，
+早期网站主要内容都是静态，以图片和文字为主，用户使用网站的行为也以浏览为主。随着互联网技术的发展和HTML5、CSS3的应用，
+现代网页更加美观，交互效果显著，功能更加强大。 移动互联网带来了大量高性能的移动终端设备以及快速的无线网络，HTML5，node.jS的广泛应用，各类框架类库层出不穷。 
+<i class="fa fa-quote-right"></i>
+<br>
+<p>
+<small style="position: relative; left: 500px;">——百度百科</small>
+</p>
+</p>
+</blockquote>
+
+<div class="reference clearfix"> 
+<div class="title_content" style="margin-bottom:5px">
+<div  class="text_content">笔记前言</div>
+<div class="clear"></div>
+</div>
+</div>
+<br>
+<!-- 笔记重要概念 -->
+<p class="im_concept">
+<em>一：HTML</em>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;首先我们需要知道什么是HTML，所谓HTML，就是Hyper Text Markup Language（超文本标记语言），
+虽然它是一种语言，但是千万不要认为HTML是编程语言，它不过是一种标记语言罢了。而超文本，则指的是“超越”文本，比如图
+片、超链接、音乐甚至程序；其中包括“头部”与“主体”部分。分别提供了网页信息与具体内容。
+</p >
+<p class="im_concept">
+<em>二：CSS</em>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+CSS的全称是：Cascading Style Sheets（层叠样式表），就如同英文表达的那样，它的工作主要是静态地修饰网页，做出你想要的freestyle；
+它有着这些特点：<br>
+1.丰富的样式定义<br>
+2.易于使用与修改<br>
+3.多页面应用<br>
+</p>
+<p class="im_concept">
+<em>三：JavaScript</em><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+与HTML、CSS不同的是，JavaScript（后文将直呼JS）才是一门真正的编程语言，也是一门直译式语言。用于动态地对网页中的DOM对象进行修改（增删改查）。
+它的主要特点：<br>
+1.是一种解释性语言，不需要像C语言那种语言，需要预编译。<br>
+2.可以直接嵌入至HTML页面中，也可以将结构与功能进行分离（外部JS） <br>
+3.跨平台特性，因为由浏览器支持，所以一处运行，多处使用。<br>
+</p>    
+<br>
+
+<!-- 笔记正文 -->
+<div class="reference clearfix"> 
+<div class="title_content" style="margin-bottom:5px">
+<div  class="text_content">笔记正文</div>
+<div class="clear"></div>
+</div>
+</div>
+<br>
+
+<div class="bottom-p">
+<!-- HTML基础 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#html_base" class="collapse_tabs">
+HTML 排版基础
+<i class="glyphicon glyphicon-chevron-up" style="float: right;font-size: 13px;"></i>
+</a>
+</h4>
+</div>
+<div id="html_base" class="panel-collapse collapse in">
+<div class="panel-body">
+<h2>HTML <small>文档结构</small></h2>
+<p>
+在标准的html网页中，我们可以看到这些<mark>关键字</mark>（标签）<br><br>
+<code>
+&lt;!DOCTYPE&gt;        //代表文档类型<br>
+&lt;html&gt;            //html文档内容<br>
+&lt;head&gt;            //网站的头部<br>
+&lt;body&gt;            //网站的主体部分<br>
+</code>
+</p>
+<br>
+
+<h2>HTML 标题<small>h1 - h6</small></h2>
+<p>
+html中的标题通过标签<em>&lt;h1&gt;&lt;/h1&gt;</em>到<em>&lt;h6&gt;&lt;/h6&gt;</em>，字体大小
+逐渐变小而实现的。h6标题是最小的，继续添加h7将无效。
+</p>
+<p>
+<code>
+&lt;h1&gt; h1标题  &lt;/h1&gt;<br>
+&lt;h2&gt; h2标题  &lt;/h2&gt;<br>
+&lt;h3&gt; h3标题  &lt;/h3&gt;<br>
+...<br>
+&lt;h6&gt; h6标题  &lt;/h6&gt;<br>
+</code>
+</p>
+<br>
+
+<h2>HTML 段落<small>p</small></h2>
+<p>
+html中的段落通过标签<em>&lt;p&gt;&lt;/p&gt;</em>实现的。值得注意的是，在<code>p</code>的尾标签结束后，将会自动换行。
+这一般也用于段落与段落之间的美化与排版。
+</p>
+
+<br>
+
+<h2>HTML 超链接<small>a</small></h2>
+<p>
+有时我们需要网页与网页之间的跳转，可以用到其中一个方法：通过标签<em>&lt;a&gt;&lt;/a&gt;</em>实现。<br>
+可以增加属性<strong>href</strong>指定链接的地址
+<p>
+<code>
+&lt;a href="http://www.baidu.com"&gt; 点我进入百度  &lt;/a&gt;<br>
+</code>
+
+</p><br>
+
+</p>
+
+<h2>HTML 图像<small>img</small></h2>
+<p>
+有时我们需要在网页中增加图片美化文档，通过标签<em>&lt;img/&gt;</em>实现。<br>
+可以增加属性<code>src</code>指定图像的来源，可以使用绝对路径或者相对路径：<br>
+
+<blockquote>
+<p>
+相对路径：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<mark>相对路径是指目标相对于当前文件的路径</mark>，内部网站设计中多采用这样的结构，以便于寻找资源。
+其常用方法如下：<br>
+./ : 代表文件所在的目录，通常可以省略不写。<br>
+../ : 代表文件所在的父级目录。<br>
+/ :代表文件所在的根目录<br>
+<br>
+<mark>绝对路径是指完整的网址</mark>，比如超链接中的“https://www.baidu.com”这个网址，多用于外部资源url的
+引入。开发中应避免在内部网站中使用绝对路径，除了不易维护，也会出现因改变目录地址而无法找到的错误。
+</p>
+</blockquote>
+
+<p>
+<code>
+&lt;a href="http://www.baidu.com"&gt; 点我进入百度  &lt;/a&gt;<br>
+</code>
+</p><br>    
+</p>
+
+<h2>字符实体</h2>
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+当你在编译器或者文本中敲写html代码时，也许你会发现这样一个有趣的问题：敲下<kbd><kbd>enter</kbd></kbd>键换到下一行继续写后，
+网页中的内容，除非超出容器外，否则不会换行；当你想要打出"&lt;" 或者"&gt;"时，也许会影响到整个HTML文档的格式等等情况。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+这时你需要到一些常见的<code>字符实体或者转义字符</code>，或者相关的标签：<br><br>
+<div class="table-container"><table class="table table-bordered table-hover">
+<tr>
+<td>字符</td>
+<td>具体含义</td>
+</tr>
+
+<tr>
+<td>br单标签</td>
+<td>换行</td>
+</tr>
+
+<tr>
+<td>&+nbsp;(去掉中间的+号)</td>
+<td>空格</td>
+</tr>
+
+<tr>
+<td>&+lt;</td>
+<td>小于</td>
+</tr>
+
+<tr>
+<td>&+gt;</td>
+<td>大于</td>
+</tr>
+</table></div>    
+</p>
+<br>
+
+<br>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- HTML表格 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#html_table" class="collapse_tabs">
+HTML 表格
+<i class="glyphicon glyphicon-chevron-up" style="float: right;font-size: 13px;"></i>
+</a>
+</h4>
+</div>
+<div id="html_table" class="panel-collapse collapse in">
+<div class="panel-body">
+<h2>HTML <small>表格结构</small></h2>
+<p>
+通常我们看到的HTML中的表格与excel中的表格，结构上没有太大的区别：<br>
+表格由<code>table</code>标签来定义。而每个表格中由行与列构成，即
+<code>tr</code>与<code>td</code>构成，<mark>且td标签需要内嵌于tr标签中，即若干个列属于同一行</mark>
+每个td：table data（表格数据）中，可以放入图片、段落、表单甚至表格。    
+<br><br>
+注意：<ins>我们在td中写数据，请勿写在tr中td外！</ins>
+<br><br>
+</p>
+<strong>实例</strong>
+<br>
+<p>
+创建一个一行两列的默认表格：<br>
+<code>
+&lt;table&gt;<br>
+&lt;tr&gt;<br>
+&lt;td&gt;第一行第一列 &lt;/td&gt;<br>
+&lt;td&gt;第一行第二列 &lt;/td&gt;<br>
+&lt;/tr&gt; <br>
+
+<p>&lt;/table&gt;<br></code></p>
+</p><br>
+
+<h2>HTML <small>表格重要属性与其他标签</small></h2>
+<p>
+<strong>边框</strong><br>
+<p>
+由于默认的表格是不带有边框的，可能在排版上不那么正规。
+因此，引入<code>border</code>属性，其值从<code>1</code>开始递增。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+带有边框的表格：
+<br>
+<code>
+&lt;table border = "1" &gt;<br>
+&lt;tr&gt;<br>
+&lt;td&gt;第一行第一列 &lt;/td&gt;<br>
+&lt;td&gt;第一行第二列 &lt;/td&gt;<br>
+&lt;/tr&gt; <br>
+&lt;/table&gt;
+</code>
+</p>
+<br>
+</p>
+<p>
+<strong>表格的表头标签</strong><small>th</small><br>
+<p>
+通常我们需要提示<code>表头</code>来提示用户，该表格的内容或者信息概要，
+此时可能会需要表头，类似网站的<code>head</code>头部信息，大多数浏览器会显示为粗体并且居中的文本。
+</p>
+<br>
+
+<p><strong>表格的标题标签</strong>caption<br></p>
+<p>
+表格的标题会被显示在，表格的正上方，且不会被边框环绕。<br>
+<code>
+&lt;caption&gt;标题&lt;/caption&gt;<br>
+&lt;table border = "1" &gt;<br>
+&lt;tr&gt;<br>
+&lt;td&gt;第一行第一列 &lt;/td&gt;<br>
+&lt;td&gt;第一行第二列 &lt;/td&gt;<br>
+&lt;/tr&gt; <br>
+&lt;/table&gt;
+</code>
+</p>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- HTML表格 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#html_list" class="collapse_tabs">
+HTML 列表
+<i class="glyphicon glyphicon-chevron-up" style="float: right;font-size: 13px;"></i>
+</a>
+</h4>
+</div>
+<div id="html_list" class="panel-collapse collapse in">
+<div class="panel-body">
+<h2>无序列表<small>ul>li</small></h2>
+<p>
+对于列表，我们可以联想到家里的购物清单。也许是有序，也许是无序。因此我们引入，列表的概念：<br>
+<br><br>
+无序列表<code>unordered list</code>的语法如下：<br>
+<p>
+<code>
+&lt;ul&gt;    <br>
+&lt;li&gt; 数据 &lt;/li&gt;<br>
+&lt;/ul&gt;<br>
+</code>
+</p>
+<mark>默认情况下，此列表的数据前会有典型的小黑圆圈标记。</mark>
+<br>
+</p>
+
+<h2>有序列表<small>ol>li</small></h2>
+<p>
+
+<p>有序列表<code>ordered list</code>的语法如下：<br></p>
+<p>
+<code>
+&lt;ol&gt;    <br>
+&lt;li&gt; 数据 &lt;/li&gt;<br>
+&lt;/ol&gt;<br>
+</code>
+</p>
+<mark>默认情况下，此列表的数据前会有数字标记。</mark><br>
+<b>我们可以通过更改属性<code>type</code>来更改有序列表数据展示的样式：<br></b>
+<br>
+<code>
+可以是"A" "I" "i" "1"分别代表不同的排列顺序！
+</code>
+<br>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- HTML表格 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#html_area" class="collapse_tabs">
+HTML 区块
+<i class="glyphicon glyphicon-chevron-up" style="float: right;font-size: 13px;"></i>
+</a>
+</h4>
+</div>
+<div id="html_area" class="panel-collapse collapse in">
+<div class="panel-body">
+<h2>块级元素<small>div</small></h2>
+<p>
+我们将div元素认定为块级元素，是因为它具有以下几个特点：<br>
+1.总是在新行开始内容<br>
+2.高度、行高、内外边距均可调整（具体内容将会在CSS中讲到）<br>
+3.宽度默认为它容器的100%<br>
+</p>
+<p>
+<h4>语法如下：</h4>
+<code>&lt;div&gt;
+<br>
+其他元素或者内容
+<br>
+&lt;/div&gt;
+</code>
+</p>
+
+<h2>行内元素<small>span</small></h2>
+<p>
+我们将span元素认定为内联元素（行内元素），是因为它具有以下几个特点：<br>
+1.不会在新行开始<br>
+2.高度等属性不可改变<br>
+3.宽度一般就为容器中的文字或者图片的高度<br>
+4.只能容纳文本等行内元素<br>
+</p>
+<p>
+<h4>语法如下：</h4>
+<code>&lt;span&gt;
+<br>
+容器中的内容
+<br>
+&lt;/span&gt;
+</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- HTML表单 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#html_form" class="collapse_tabs">
+HTML 表单
+<i class="glyphicon glyphicon-chevron-up" style="float: right;font-size: 13px;"></i>
+</a>
+</h4>
+</div>
+<div id="html_form" class="panel-collapse collapse in">
+<div class="panel-body">
+<h2>表单输入<small>form>input</small></h2>
+<h3>表单form</h3>
+<p>
+去应聘的时候，工作人员往往会给你一张表单让你填写你的个人信息，包括姓名，年龄，兴趣爱好，个人介绍等。
+</p>
+<p>
+表单的语法如下：<br>
+<code>
+&lt;form&gt;<br>
+填写input各类型的元素<br>
+&lt;/form&gt;<br>    
+</code>
+</p>
+
+<p>
+<code>
+表单有如下重要属性：<br>
+一：处理程序属性action：URL（表单提交的地址）<br>
+二：表单名称name：不同的表单尽量使用不同的名字，避免混淆<br>
+三：提交方法，GET与POST：<br>
+<p>
+首先get是默认的提交方式，它会将表单中的输入元素等相关参数，附在网页的URL后；<br>
+因此我们可以看出，<mark>对于比较敏感的数据，它是不太安全的。</mark><br>
+但是，它是主动推送数据给服务器的，因此比起post，<mark>它更快速。</mark>
+</p>
+四：编码属性：（multipart/form-data）MIME多用途网络邮件<br>
+顶级媒体类型/子类型（后缀名）
+text：文本<br>
+application：应用<br>
+multipart：多部分媒体<br>
+audio：音频文件<br>
+image：图片<br>
+message：消息<br>
+</code>
+</p>        
+
+
+<h3>输入input</h3>
+<p>
+输入元素的语法如下：<br>
+<code>
+&lt;input type = "input_type"&gt;<br>    
+</code>
+</p>
+
+<p>
+输入元素被包含在<code>form</code>中，常见的元素类型<code>type</code>被列举如下：<br>
+<h4>文本域<small>text</small></h4>
+<p>
+语法如下：<br>
+<code>
+&lt;form&gt;<br>
+&lt;input type = "text"&gt;<br>    
+&lt;/form&gt;<br>    
+</code>
+</p>
+
+<p>
+我们通常在文本域中填写可见的文字或者数字，<mark>其默认长度为20字符</mark>，
+</p>
+
+<h4>密码域<small>password</small></h4>
+<p>
+密码字符不会明码显示（废话），将会以黑色星点或者圆点代替。语法如下：<br>
+<code>
+&lt;form&gt;<br>
+&lt;input type = "password"&gt;<br>    
+&lt;/form&gt;<br>    
+</code>
+</p>
+
+<h4>单选框<small>radio</small></h4>
+<p>
+如果限选一个选项，我们需要用单选框，<mark>注意，请给他们赋予
+相同的<code>name</code>属性；请
+将给用户看的选项与你input输入元素的value属性值相等。</mark>比如：<br>
+<code>吧、
+&lt;form&gt;<br>
+&lt;input type = "radio" name = "sex" value = "男"&gt;男<br>    
+&lt;input type = "radio" name = "sex" value = "女"&gt;女<br>    
+&lt;/form&gt;<br>    
+</code>
+</p>
+
+<h4>多选框<small>checkbox</small></h4>
+<p>
+从若干个选项中选取一个或多个，我们需要用多选框，仍旧建议使用相同的name，并且value值与显示出来的值相同：<br>
+<code>
+&lt;form&gt;<br>
+&lt;input type = "checkbox" name = "vehicle" value = "轿车"&gt;轿车<br>    
+&lt;input type = "checkbox" name = "vehicle" value = "自行车"&gt;自行车<br>    
+&lt;/form&gt;<br>    
+</code>
+</p>
+
+<h4>提交按钮<small>submit</small></h4>
+<p>
+填写完所有服务器需要的信息后，我们可以添加提交按钮，表示信息准备提交至服务器:<br>
+<code>
+&lt;form&gt;<br>
+&lt;input type = "submit" value = "提交"&gt;提交<br>    
+&lt;/form&gt;<br>    
+</code>
+</p>
+
+<p>
+<strong>请注意</strong>
+提交按钮<code>submit</code>与普通按钮<code>button</code>的区别：<br>
+<p>
+1.一般submit用于表单提交；而button仅仅是一个按钮，只要绑定不同的事件，就能实现不同的功能。
+<br>2.submit与button修改按钮上的文字的方式也不同，对于submit，有自己的属性<code>value</code>，
+我们用JS捕获到该DOM对象后，通过修改这个属性值来修改文字；button通过直接修改innerHTML值来修改其按钮上的文本值。
+</p>
+</p>
+
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- HTML颜色 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#html_color" class="collapse_tabs">
+HTML 颜色
+<i class="glyphicon glyphicon-chevron-up" style="float: right;font-size: 13px;"></i>
+</a>
+</h4>
+</div>
+<div id="html_color" class="panel-collapse collapse in">
+<div class="panel-body">
+<h2>HTML中的颜色<small>十六进制或者RGB（Red，Green，Blue）</small></h2>
+<p>
+HTML中的颜色可以由十六进制来定义，这个符号由相应RGB的值来确定；<mark>每个值的区间是[0(#00),255(#FF)]</mark>
+下面列举常用颜色的RGB值：<br>
+<code>
+#000000 / rgb(0,0,0)：   黑色<br>
+#FF0000 / rgb(255,0,0)： 红色<br>
+#00FF00 / rgb(0,255,0)： 绿色<br>
+#0000FF / rgb(0,0,255)： 蓝色<br>
+#FFFFFF    / rgb(255,255,255): 白色<br>                                
+</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://vincent990413.github.io">何水浪</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://vincent990413.github.io/2021/03/15/HTML/">https://vincent990413.github.io/2021/03/15/HTML/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://vincent990413.github.io/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">前端学习笔记</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/03/15/MongoDB/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">MongoDB学习笔记</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/15/%E7%BF%BB%E8%AF%91%E4%BD%9C%E5%93%81-%E5%9B%9E%E7%AD%94%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E5%BC%8F/"><span class="paginator-prev__text">翻译作品-替换“我不知道”的八种更好的回答</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#html"><span class="toc-number">1.</span> <span class="toc-text">HTMLHyperText Markup Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#accordion"><span class="toc-number">1.0.1.</span> <span class="toc-text">
+
+HTML 排版基础
+
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_base"><span class="toc-number">2.</span> <span class="toc-text">HTML 文档结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_base"><span class="toc-number">3.</span> <span class="toc-text">HTML 标题h1 - h6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_base"><span class="toc-number">4.</span> <span class="toc-text">HTML 段落p</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_base"><span class="toc-number">5.</span> <span class="toc-text">HTML 超链接a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_base"><span class="toc-number">6.</span> <span class="toc-text">HTML 图像img</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_base"><span class="toc-number">7.</span> <span class="toc-text">字符实体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#accordion"><span class="toc-number">7.0.1.</span> <span class="toc-text">
+
+HTML 表格
+
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_table"><span class="toc-number">8.</span> <span class="toc-text">HTML 表格结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_table"><span class="toc-number">9.</span> <span class="toc-text">HTML 表格重要属性与其他标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#accordion"><span class="toc-number">9.0.1.</span> <span class="toc-text">
+
+HTML 列表
+
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_list"><span class="toc-number">10.</span> <span class="toc-text">无序列表ul&gt;li</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_list"><span class="toc-number">11.</span> <span class="toc-text">有序列表ol&gt;li</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#accordion"><span class="toc-number">11.0.1.</span> <span class="toc-text">
+
+HTML 区块
+
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_area"><span class="toc-number">12.</span> <span class="toc-text">块级元素div</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html_area"><span class="toc-number">12.0.1.</span> <span class="toc-text">语法如下：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_area"><span class="toc-number">13.</span> <span class="toc-text">行内元素span</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html_area"><span class="toc-number">13.0.1.</span> <span class="toc-text">语法如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#accordion"><span class="toc-number">13.0.2.</span> <span class="toc-text">
+
+HTML 表单
+
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_form"><span class="toc-number">14.</span> <span class="toc-text">表单输入form&gt;input</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html_form"><span class="toc-number">14.1.</span> <span class="toc-text">表单form</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html_form"><span class="toc-number">14.2.</span> <span class="toc-text">输入input</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html_form"><span class="toc-number">14.2.1.</span> <span class="toc-text">文本域text</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#html_form"><span class="toc-number">14.2.2.</span> <span class="toc-text">密码域password</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#html_form"><span class="toc-number">14.2.3.</span> <span class="toc-text">单选框radio</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#html_form"><span class="toc-number">14.2.4.</span> <span class="toc-text">多选框checkbox</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#html_form"><span class="toc-number">14.2.5.</span> <span class="toc-text">提交按钮submit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#accordion"><span class="toc-number">14.2.6.</span> <span class="toc-text">
+
+HTML 颜色
+
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_color"><span class="toc-number">15.</span> <span class="toc-text">HTML中的颜色十六进制或者RGB（Red，Green，Blue）</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">C'est la vie</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>何水浪</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: 'fJ4fFnieffDVKy4Jkn16aHdO-gzGzoHsz',
+    appKey: 'qfVo2CUC2pJ3udFzLFnd0GBM',
+    notify: true,
+    verify: true,
+    placeholder: '说点啥再走呗~爱你',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: false,
+    recordIP: false,
+    lang: '' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

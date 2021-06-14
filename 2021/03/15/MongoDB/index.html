@@ -1,0 +1,833 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content=".back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;} .back-top&gt;a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB学习笔记">
+<meta property="og:url" content="https://vincent990413.github.io/2021/03/15/MongoDB/index.html">
+<meta property="og:site_name" content="斯人若彩虹 遇上方知有">
+<meta property="og:description" content=".back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;} .back-top&gt;a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210317153238734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-03-15T08:54:23.000Z">
+<meta property="article:modified_time" content="2021-04-18T13:34:10.000Z">
+<meta property="article:author" content="何水浪">
+<meta property="article:tag" content="非关系型数据库学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210317153238734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70"><title>MongoDB学习笔记 | 斯人若彩虹 遇上方知有</title><link ref="canonical" href="https://vincent990413.github.io/2021/03/15/MongoDB/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="斯人若彩虹 遇上方知有" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">斯人若彩虹 遇上方知有</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">MongoDB学习笔记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-15</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-04-18</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.8k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">18分</span></span></div></header><div class="post-body"><!-- 页面必备样式 -->
+<style>
+.back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;}
+.back-top>a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height: 50px;border-radius: 50px;background-color:rgba(255,255,255,0.5);}
+</style>
+<div class="back-top">
+    <a href="#top"> >返回顶部< </a>
+</div>
+<!-- toc -->
+<!-- 必备样式结束 -->
+
+<!-- 以下是MongoDB的笔记 -->
+<div id="mongodb">
+<h2>MongoDB<small>非关系数据库中的佼佼者</small></h2>
+
+<blockquote>         
+<p>
+<i class="fa fa-quote-left"></i>  MongoDB，源自英语“Humongous”巨大的，当今也被广泛应用于大数据；Not only SQL也具体说出了非关系型数据库的心声，为什么呢？
+SQL是结构化，关系型的数据库，是数据库的当之无愧的老大：MySQL&SQL Server。这两家数据库在这几年的发展一直高居不下。同时，由
+于大数据的蓬勃发展，大量的信息开始趋于非关系化，非结构化，冗杂繁多的信息量使得数据库本身越来越复杂，因此“关系型数据库”的规范
+化也越来越明显，同时也需要建立越来越多的表，关联，数据库。
+作为NoSQL领军者的Redis和mongoDB后来者居上，MongoDB是一个跨平台，面向文档的数据库，提供高性能，高可用性和易于扩展；同时是工作在集合
+和文档上的一种概念。在处理大数据的冗杂性与结构繁多性，非关系型数据库MongoDB将成为数据库中的“秀儿”。
+<i class="fa fa-quote-right"></i>
+</p>
+</blockquote>
+
+<div class="reference clearfix"> 
+<div class="title_content" style="margin-bottom:5px">
+<div  class="text_content">笔记前言</div>
+<div class="clear"></div>
+</div>
+</div>        
+
+<br>
+<!-- 笔记重要概念 -->
+
+<p><em>一：数据库</em><br>MongoDB中的Database是Collection的物理容器，也就是存储所有文件与集合的文件系统，通常在一个MongoDB Server中存在有至少一个的Database。</p>
+<p><em>二：集合</em></p>
+<p>集合（Collection）可以说是数据库紧接着的下一个重要的概念，同时也是MongoDB的重要的特点之一，可以和RDBMS（Relational Database Management System）中的table等效；也就是说它是许多文件数据的存储点。一个集合存在于数据库中。集合不强制执行模式。集合中的文档可以有不同的字段。通常情况下，在一个集合中的所有文件都是类似或相关目的。因此这也是NoSQL数据库的众多特点与优点之一。</p>
+<p class="im_concept">
+<em>三：文件</em><br>
+&nbsp;&nbsp;&nbsp;&nbsp;文档是一组键值对（Key-Value)。文档具有动态模式。动态模式是指，在同一个集合的文件不必具有相同一组集合的文档字段或结构，并且相同的字段可以保持不同类型的数据。
+</p>                                                                     
+
+<!-- 笔记正文 -->
+<div class="reference clearfix"> 
+
+<div class="bottom-p">
+<!-- 数据库部分 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+
+<div id="mongo_db" class="panel-collapse collapse in">
+<div class="panel-body">
+<h3>创建数据库</h3>
+<h5>相应命令与语法</h5>
+<p>
+MongoDB建立一个新的数据库会使用到<code>use database_name</code>命令，
+如果不存在该database的名字，将会重新创建一个。否则会返回use的这个数据库：使用use命令创建数据库->
+<br>
+<br>    
+<code>db</code>命令查看当前所使用的数据库<br>
+<code>
+> db;<br>
+databasetest <br>
+</code>
+<br>
+
+<p>MongoDB查看当前所有数据库会使用到<code>show</code>命令:</p>
+<blockquote>
+<p>show dbs;<br>admin 0.00GB<br>local 0.00GB<br>test  0.00GB </p>
+</blockquote>
+<br>
+在MongoDB中默认的数据库是<code>test</code>，若没有创建过任何数据库则会默认将数据保存在这个数据库中。
+<br>
+</p>
+
+<h3>删除数据库</h3>
+<h5>相应命令与语法</h5>
+<p>
+MongoDB数据库删除一个当前已有的数据库，将会用到<code>db.dropDatabase()</code>命令，
+前面已提到，如果未曾创建过任何数据库，那么将会删除默认的<code>test</code>的数据库；<br>
+
+<blockquote>
+<p>db.dropDatabase();<br>{“dropped” : “test”, “ok” : 1}</p>
+</blockquote>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- 集合部分 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div id="mongo_col" class="panel-collapse collapse in">
+<div class="panel-body">
+<h3>创建集合</h3>
+<h5>相应命令与语法</h5>
+
+<p>
+MongoDB建立一个新的集合会使用到<code>db.createCollection(collection_name,collection_options)</code>命令，
+该命令中，collection_name是集合的名字，而collection_options是指定可选的配置属性：
+</p>
+
+<p><img   src="https://img-blog.csdnimg.cn/20210317153238734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p>
+<h5><strong>如何在test数据库中创建集合</strong></h5>
+
+<blockquote>
+<p>use test<br>switched to db test<br>db.createCollection(“runoob”)<br>{ “ok” : 1 }</p>
+</blockquote>
+<p>在你插入了一些文档数据后，MongoDB会自动帮你创建集合。</p>
+<blockquote>
+<p>db.mongo.insert({“name:” “vincent”});<br>show collections;<br>mongo</p>
+</blockquote>
+<h3>删除集合</h3>
+<h5>相关命令与语法</h5>
+<p>
+MongoDB中删除一个新的集合会使用到<code>db.collection_name.drop()</code>方法<br>
+<em>返回值</em><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+如果成功删除选定的集合，该方法将会返回true，否则会返回false.<br>
+</p>
+
+<p>
+<strong>实例</strong> <br>
+首先可以使用<code>show collections;</code>查看当前所有已经存在的集合。
+
+<blockquote>
+<p>use test;<br>switched to db test<br>show collections;<br>test<br>local </p>
+</blockquote>
+<p>接着删除该集合</p>
+<blockquote>
+<p>db.test.drop();<br>true </p>
+</blockquote>
+<p>通过<code>show collections</code>再次查看数据库test中的所有集合. </p>
+<blockquote>
+<p>show collections;<br>local </p>
+</blockquote>
+<p>我们可以看出<mark>test</mark>集合已被我们删除。</p>
+</p>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- 集合部分 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+
+<div id="mongo_doc" class="panel-collapse collapse in">
+<div class="panel-body">
+<h3>MongoDB 插入文档<small>相关命令与语法</small></h3>
+<p>
+MongoDB使用<code>insert()</code>或者<code>save()</code>方法向集合中插入文档，
+<mark>就像关系型数据库中，向表中插入数据一样。</mark><br>
+
+<p><strong>实例</strong><br>将数据插入到test集合中</p>
+<pre><code>db.test.insert(&#123;
+name: &#39;mongodb&#39;,
+writer: &#39;vincent&#39;
+&#125;);
+</code></pre>
+<p>当然，也可以使用db.test.save()命令，如果不指定_id字段，方法类似insert()方法。如果指定，则会更新该_id的数据。<br><br><br>在3.2版本后，还有一下几种语法可用于插入文档：</p>
+<pre><code>db.collection_name.inertOne();//插入一条数据
+db.collection_name.insertMany();//插入多条数据
+</code></pre>
+</p>
+<h3>MongoDB 更新文档<small>相关命令与语法</small></h3>
+<p>
+MongoDB使用<code>update()</code>与<code>save()</code>更新文档，分别来看看这两个方法：<br>
+<h4>update()方法</h4>
+<mark>update()方法用于更新已存在的的文档，语法如下：<br></mark>
+<br>
+
+<p>db.test.update(<br><strong>query 查找方式</strong>,<br><strong>update 如何操作</strong>,<br>);</p>
+<p><strong>实例<br></strong></p>
+<p>首先已知在test集合中，插入了name为vincent的数据。现在需要修改为rebecca：</p>
+<pre><code>&gt;db.test.update(&#123;&#39;name&#39;:&#39;vincent&#39;&#125;,&#123;$set:&#123;&#39;name&#39;:&#39;rebecca&#39;&#125;&#125;);
+WriteResult(&#123; &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 &#125;) 
+</code></pre>
+<h4>save()方法</h4>
+<mark>save()方法通过传入的文档来替换已有文档。语法如下：<br></mark>
+
+
+<pre><code>db.test.save(
+document
+)
+</code></pre>
+</p>
+
+<h3>MongoDB 删除文档<small>相关命令与语法</small></h3>
+<p>
+MongoDB中删除文档，将会使用到<code>remove()</code>方法，建议在删除之前，先查询一下想要删除的数据对象详情。<br><br>
+
+<pre><code>db.test.remove(query,&#123;justOne: boolean;&#125;);
+</code></pre>
+<p><ins>其中，justOne是可选的，它代表是否只删除，多个符合删除条件中的，一条数据。如果选择只删除一条，那么置为1（true）。</ins><br><br><br>官方推荐使用<code>deleteOne()</code>和<code>deleteMany()</code>方法：<br>    </p>
+<p>如删除集合下全部文档：</p>
+<pre><code>删除全部文档：
+db.test.deleteMany(&#123;&#125;)
+
+删除 status 等于 B 的一个文档：
+db.test.deleteOne( &#123; status: &quot;B&quot; &#125; ) 
+</code></pre>
+</p><br>
+
+<h3>MongoDB 查询文档<small>相关命令与语法</small></h3>
+<p>
+MongoDB查询文档并以<mark>非结构化形式</mark>显示的方法为find()命令。<br>
+而<code>pretty()</code>方法是以易读的形式显示。<br>
+<code>db.test.find().pretty();</code><br>
+
+<p>
+各种RDBMS（关系型数据库管理系统）中where条件的表达方式：
+
+<pre><code>等于：&#123;key:value&#125;
+小于：&#123;key: &#123;$lt:value&#125;&#125;
+大于：&#123;key: &#123;$gt:value&#125;&#125;
+小于或等于：&#123;key: &#123;$lte:value&#125;&#125;
+大于或等于：&#123;key: &#123;$gte:value&#125;&#125;
+不等于：&#123;key: &#123;$ne:value&#125;&#125;
+</code></pre>
+</p>
+
+<h4>MongoDB AND 和条件</h4>
+<p>
+MongoDB中的查询可以传入多个值，其中用<code>，</code>逗号隔开就行。
+<br>
+
+<pre><code>&gt; db.test.find(&#123;&quot;name&quot;:&quot;vincent&quot;, &quot;age&quot;:&quot;18&quot;&#125;).pretty(); 
+</code></pre>
+</p>
+
+<h4>MongoDB OR 或条件</h4>
+<p>
+MongoDB中的查询除了可以传入和条件，也可以传入OR条件
+<br>
+
+<pre><code>&gt; db.test.find(&#123;$or: [&#123;key1: value1&#125;, &#123;key2:value2&#125;]&#125;).pretty(); 
+</code></pre>
+</p>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- 集合部分 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+
+<div id="limit" class="panel-collapse collapse in">
+<div class="panel-body">
+<h3>MongoDB $type 操作符<small>相关命令与语法</small></h3>
+<p>
+常见数据类型：<br>
+
+<div class="table-container"><table class="table-bordered table-hover table-condensed">
+<tr>
+<td>Integer</td>
+<td>数值类型，在计算机中可以是32也可以是64位</td>
+</tr>
+<tr>
+<td>String</td>
+<td>字符串类型，UTF-8编码</td>
+</tr>
+<tr>
+<td>Double</td>
+<td>浮点类型</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>布尔类型，true或者false</td>
+</tr>
+<tr>
+<td>Arrays</td>
+<td>数组类型，可以存储多个相同类型的值</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>空值类型</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>存储JS代码于文档中</td>
+</tr>
+<tr>
+<td>Regular expression</td>
+<td>正则表达式</td>
+</tr>
+<tr>
+<td>Binary data</td>
+<td>存储二进制形式的数据</td>
+</tr>
+</table></div><br>
+<strong>实例</strong><br>
+假设已经插入数据名为Vincent的学生信息，其中name属性是以字符串形式存储的。<br>
+
+<pre><code>db.test.insert(&#123;
+name: &quot;Vincent&quot;
+&#125;);
+</code></pre>
+<br>
+现在想要访问name属性为string类型的数据，可以这么查询：<br>
+
+<pre><code>db.test.find(&#123;&quot;title&quot;: &#123;$type : 2&#125;&#125;);
+db.test.find(&#123;&quot;title&quot; : &#123;$type : &#39;string&#39;&#125;&#125;);
+</code></pre>
+</p>
+
+<h3>MongoDB Limit() 分页<small>相关命令与语法</small></h3>        
+<p>
+与RDB一样，MongoDB中查询也可以<mark>指定读取的数据记录数</mark>，
+往该方法中写入一个参数，即<strong>读取的数量</strong>。
+
+<pre><code>db.test.find().limit(num);
+</code></pre>
+<p>其中，如果不指定数量，那么将会显示所有符合条件的数据记录。<br></p>
+<br>
+
+<p><strong>实例</strong><br></p>
+<p>
+假设已经存在三条数据，name属性分别为jack，vincent，rebecca。现在想要查询前两条：
+
+<pre><code>db.test.find(&#123;&quot;name&quot; : 1, _id : 0&#125;).limit(2);
+&#123;&quot;name&quot; : jack&#125; 
+&#123;&quot;name&quot;: vincent&#125;
+</code></pre>
+</p>
+
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- 集合部分 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+
+<div id="sort" class="panel-collapse collapse in">
+<div class="panel-body">
+<h3>MongoDB sort()<small>相关命令与语法</small></h3>
+<p>
+在MySQL中，排序是通过<code>ORDER BY</code>来实现的，而在 MongoDB 中，排序是通过<code>sort()</code>
+方法实现，并指定特定键的排序方式——升序或者降序（1或者-1）：
+
+<pre><code>db.test.find().sort(&#123;key_name: 1&#125;);
+</code></pre>
+<p>上述代码将会以key_name升序的结果排序展示。</p>
+<p>skip(), limilt(), sort()三个放在一起执行的时候，执行的顺序是先 sort(), 然后是 skip()，最后是显示的 limit()。</p>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-p">
+<!-- 索引与聚合 -->
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+
+<div id="index" class="panel-collapse collapse in">
+<div class="panel-body">
+<h3>MongoDB 索引<small>相关命令与语法</small></h3>
+<p>
+在处理非常大的数据时，可以想象，如果没有<mark>索引</mark>这样特殊的数据结构，查询时间将会花费几倍甚至几十倍的时间，
+对网站的维护性能来说无疑是致命的。
+
+<h4>createIndex() 创建索引</h4>
+<p>
+在MongoDB中使用该方法创建索引，同时可以传入参数，具体语法如下：<br><br>
+
+<pre><code>&gt;db.test.createIndex(keys_name, options)
+</code></pre>
+<p>Key_name 值为你要创建的索引字段，<strong>可以以逗号隔开作为复合索引</strong>，<mark>1 为指定按升序创建索引，如果你想按降序来创建索引指定为 -1</mark>  即可。<br><br><br>options 是可选的额外参数：<br><br></p>
+<div class="table-container"><table class="table-striped table-bordered table">
+<tr>
+<td>参数</td>
+<td>类型</td>
+<td>介绍</td>
+</tr>
+<tr>
+<td>background</td>
+<td>boolean</td>
+<td>指定以“后台”方式建立索引，因为建立索引将会阻塞其他数据库操作，为了不影响多个操作的同时进行，指定为后台方式创建。</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>boolean</td>
+<td>“唯一”索引，默认值为false，开启则置为true</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>为索引指定一个名称，通过连接索引的字段名和排序顺序生成一个索引名称。</td>
+</tr>
+</table></div>
+</p>
+<strong>实例</strong><br><br>
+<p>
+创建一个以name和age属性并且升序的索引：<br>
+
+<pre><code>db.test.createIndex(&#123;&quot;name&quot; : 1, &quot;age&quot; : 1&#125;);
+</code></pre>
+</p>
+
+<p>常见关于索引的操作：<br>1、查看集合索引<br>db.col.getIndexes()</p>
+<p>2、查看集合索引大小<br>db.col.totalIndexSize()</p>
+<p>3、删除集合所有索引<br>db.col.dropIndexes()</p>
+<p>4、删除集合指定索引<br>db.col.dropIndex(“索引名称”)</p>
+<h3>MongoDB 聚合<small>相关命令与语法</small></h3>
+<p>
+<h4>aggregate() 方法</h4>
+<p>
+聚合一般用于统计数据，例如求最大值、平均数求和等等；<br>
+
+<pre><code>&gt; db.test.aggregate(operation);
+</code></pre>
+<p>
+假设集合中存在name为vincent、jack和rebecca的数据记录。<br>
+并且所学科目名subject相应为：<br>
+vincent所属分别为：《计算机1》、《计算机2》、《计算机3》，<br>
+jack所属分别为：《文学1》、《文学2》，<br>
+rebecca所属分别为：《经济史1》、《经济史2》、《经济史3》、《经济史4》<br>
+</p>
+
+<p>
+现在需要得到每个人所阅读的科目总数，可以如下：
+
+<pre><code>&gt; db.test.aggregate([&#123;$group : &#123;_id : &quot;$name&quot;, subject : &#123;$sum : 1&#125;&#125;&#125;])
+
+&quot;result&quot; : [
+ &quot;_id&quot; : &quot;runoob.com&quot;,
+ &quot;num_tutorial&quot; : 2
+&#125;,
+&#123;
+ &quot;_id&quot; : &quot;Neo4j&quot;,
+ &quot;num_tutorial&quot; : 1
+&#125;
+],
+&quot;ok&quot; : 1
+&#125;
+</code></pre>
+<p>相当于SQL语句：</p>
+<pre><code>select name, count(*) from mycol group by name
+</code></pre>
+</p>
+<br><br>
+常见的聚合表达式：<br>
+<div class="table-container"><table class="table-bordered table-hover">
+<tr>
+<td>$sum</td>
+<td>计算数据记录条数的总和</td>
+</tr>
+<tr>
+<td>$avg</td>
+<td>计算平均值</td>
+</tr>
+<tr>
+<td>$min</td>
+<td>计算对应组的最小值</td>
+</tr>
+<tr>
+<td>$max</td>
+<td>计算对应组的最大值</td>
+</tr>
+</table></div>
+</p>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://vincent990413.github.io">何水浪</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://vincent990413.github.io/2021/03/15/MongoDB/">https://vincent990413.github.io/2021/03/15/MongoDB/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://vincent990413.github.io/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">非关系型数据库学习笔记</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/03/15/CSS/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">CSS学习笔记</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/15/HTML/"><span class="paginator-prev__text">HTML学习笔记</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mongodb"><span class="toc-number">1.</span> <span class="toc-text">MongoDB非关系数据库中的佼佼者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_db"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mongo_db"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">相应命令与语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_db"><span class="toc-number">1.2.</span> <span class="toc-text">删除数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mongo_db"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">相应命令与语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_col"><span class="toc-number">1.3.</span> <span class="toc-text">创建集合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mongo_col"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">相应命令与语法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mongo_col"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">如何在test数据库中创建集合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_col"><span class="toc-number">1.4.</span> <span class="toc-text">删除集合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mongo_col"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">相关命令与语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.5.</span> <span class="toc-text">MongoDB 插入文档相关命令与语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.6.</span> <span class="toc-text">MongoDB 更新文档相关命令与语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.6.1.</span> <span class="toc-text">update()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.6.2.</span> <span class="toc-text">save()方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.7.</span> <span class="toc-text">MongoDB 删除文档相关命令与语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.8.</span> <span class="toc-text">MongoDB 查询文档相关命令与语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.8.1.</span> <span class="toc-text">MongoDB AND 和条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mongo_doc"><span class="toc-number">1.8.2.</span> <span class="toc-text">MongoDB OR 或条件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#limit"><span class="toc-number">1.9.</span> <span class="toc-text">MongoDB $type 操作符相关命令与语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#limit"><span class="toc-number">1.10.</span> <span class="toc-text">MongoDB Limit() 分页相关命令与语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sort"><span class="toc-number">1.11.</span> <span class="toc-text">MongoDB sort()相关命令与语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-number">1.12.</span> <span class="toc-text">MongoDB 索引相关命令与语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#index"><span class="toc-number">1.12.1.</span> <span class="toc-text">createIndex() 创建索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-number">1.13.</span> <span class="toc-text">MongoDB 聚合相关命令与语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#index"><span class="toc-number">1.13.1.</span> <span class="toc-text">aggregate() 方法</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">C'est la vie</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>何水浪</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: 'fJ4fFnieffDVKy4Jkn16aHdO-gzGzoHsz',
+    appKey: 'qfVo2CUC2pJ3udFzLFnd0GBM',
+    notify: true,
+    verify: true,
+    placeholder: '说点啥再走呗~爱你',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: false,
+    recordIP: false,
+    lang: '' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

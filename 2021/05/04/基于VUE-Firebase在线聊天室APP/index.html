@@ -1,0 +1,574 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content=".back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;} .back-top&gt;a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于VUE&amp;Firebase的在线聊天室APP">
+<meta property="og:url" content="https://vincent990413.github.io/2021/05/04/%E5%9F%BA%E4%BA%8EVUE-Firebase%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4APP/index.html">
+<meta property="og:site_name" content="斯人若彩虹 遇上方知有">
+<meta property="og:description" content=".back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;} .back-top&gt;a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504093916655.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504094100562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021050409425939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504094426971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504094640180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504095902400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504100207129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504100443748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504100648267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504100842673.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504101140579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504101315653.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504101612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504200221560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504194806246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504201725607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210504202829214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-05-04T01:30:10.000Z">
+<meta property="article:modified_time" content="2021-05-04T12:56:44.000Z">
+<meta property="article:author" content="何水浪">
+<meta property="article:tag" content="前端项目">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210504093916655.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70"><title>基于VUE&amp;Firebase的在线聊天室APP | 斯人若彩虹 遇上方知有</title><link ref="canonical" href="https://vincent990413.github.io/2021/05/04/%E5%9F%BA%E4%BA%8EVUE-Firebase%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4APP/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="斯人若彩虹 遇上方知有" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">斯人若彩虹 遇上方知有</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">基于VUE&amp;Firebase的在线聊天室APP</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-05-04</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-05-04</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.1k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">25分</span></span></div></header><div class="post-body"><!-- 页面必备样式 -->
+<style>
+.back-top{position: fixed;top: 500px;height: 0px;float: right;right: 50px;}
+.back-top>a{font-weight:bold;width: 50px;height: 50px;text-align: center;text-decoration: none;font-size: 5px;line-height: 50px;border-radius: 50px;background-color:rgba(255,255,255,0.5);}
+</style>
+<div class="back-top">
+    <a href="#top"> >返回顶部< </a>
+</div>
+<!-- toc -->
+<!-- 必备样式结束 -->
+
+
+        <h1 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h1>
+      <p><strong>这一期我们准备做一个基于VUE3.0 Composition API与FireBase的在线聊天室</strong></p>
+<p><strong>用户登陆到我们的在线聊天室进行聊天</strong></p>
+
+        <h1 id="前期准备"   >
+          <a href="#前期准备" class="heading-link"><i class="fas fa-link"></i></a><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1>
+      <p><strong>命令行中利用vue-cli创建vue3.0项目</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vue create test </span><br><span class="line"><span class="comment">//test是项目名</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img   src="https://img-blog.csdnimg.cn/20210504093916655.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>选择手动添加Manually select features</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504094100562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>选择上述勾选项</strong></p>
+<p><strong>接下来，选择3.x（preview）因为要用到VUE的composition API</strong></p>
+<p><strong>选择with node-sass，如下图所示：</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/2021050409425939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>然后一直enter即可，直到出现package.json，如图所示：</strong></p>
+<p><strong>选择In package.json</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504094426971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>出现preset选项，选择否 not save</strong></p>
+<p><strong>然后经过漫长的等待…</strong></p>
+<p><strong>如果一切顺利，那么会出现下图所示：</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504094640180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Successfully created project test.</span><br><span class="line">Get started <span class="keyword">with</span> the following commands:</span><br><span class="line"></span><br><span class="line">$ cd test</span><br><span class="line">$ npm run serve</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>cd 切换到这个新项目的工作目录。</strong></p>
+<p><strong>这个时候我们要安装Firebase数据库用于聊天室中所有消息的存储</strong></p>
+<ul>
+<li>注意，Firebase由Google创建并持续维护，安装前请科学上网 ✈ ️</li>
+</ul>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i firebase</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>目前为止，我们的前期工作就已经做好了！</strong></p>
+<p>然后利用VS Code或者IDEA等编译器导入这个VUE项目即可</p>
+
+        <h1 id="配置项目的数据库Firebase"   >
+          <a href="#配置项目的数据库Firebase" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置项目的数据库Firebase" class="headerlink" title="配置项目的数据库Firebase"></a>配置项目的数据库Firebase</h1>
+      <p><strong>首先，我们需要修改一个配置信息</strong></p>
+<p>打开<code>package.json</code> 在”rules”中添加：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;no-unused-vars&quot;</span>: <span class="string">&quot;off&quot;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>因为在做一些初始配置，所以演示的时候，可能会因为定义了未被使用的变量而报错。</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504095902400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+
+        <h2 id="Src-目录下创建db-js-firebase配置数据库信息"   >
+          <a href="#Src-目录下创建db-js-firebase配置数据库信息" class="heading-link"><i class="fas fa-link"></i></a><a href="#Src-目录下创建db-js-firebase配置数据库信息" class="headerlink" title="Src 目录下创建db.js firebase配置数据库信息"></a>Src 目录下创建db.js firebase配置数据库信息</h2>
+      <p><img   src="https://img-blog.csdnimg.cn/20210504100207129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>进入db.js</strong></p>
+<p>输入以下备用代码：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> firebase <span class="keyword">from</span> <span class="string">&quot;firebase/app&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;firebase/database&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="comment">//API KEYS</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> db = firebase.initializeApp(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> db;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>这里注意到，我们的config中还没有配置我们firebase的接口信息（包括你这个应用的KEY、用户KEYS、项目ID等等）</strong></p>
+<p><strong>因此，接下来我们要去firebase的官网配置：</strong></p>
+<ol>
+<li><p>点击右上角的转到控制台</p>
+</li>
+<li><p>点击添加项目并输入项目名称</p>
+</li>
+<li><p>取消勾选“为此项目启动 Google Analytics分析”</p>
+</li>
+<li><p>等待正在创建项目…</p>
+</li>
+</ol>
+<p><img   src="https://img-blog.csdnimg.cn/20210504100443748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504100648267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ol start="5">
+<li>点击对应的项目名，顺利的话，会进入以下画面：</li>
+</ol>
+<p><img   src="https://img-blog.csdnimg.cn/20210504100842673.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ol start="6">
+<li>添加网页端应用，并获取到应用接口信息</li>
+</ol>
+<p><img   src="https://img-blog.csdnimg.cn/20210504101140579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ol start="7">
+<li>输入我们的应用别名，注册应用后，可以获得Firebase SDK （下图所示）</li>
+</ol>
+<p><img   src="https://img-blog.csdnimg.cn/20210504101315653.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>由于我们已经在项目中 预先安装了firebase 那么就不用最上面的JS引入语句了</strong></p>
+<p><strong>JS文件内容如下：</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="comment">// Your web app&#x27;s Firebase configuration</span></span><br><span class="line">  <span class="keyword">var</span> firebaseConfig = &#123;</span><br><span class="line">    <span class="attr">apiKey</span>: <span class="string">&quot;AIzaSyAgKkSD7cherkQylfbmrr_cCb6awLk9ynk&quot;</span>,</span><br><span class="line">    <span class="attr">authDomain</span>: <span class="string">&quot;test-dc7e4.firebaseapp.com&quot;</span>,</span><br><span class="line">    <span class="attr">projectId</span>: <span class="string">&quot;test-dc7e4&quot;</span>,</span><br><span class="line">    <span class="attr">storageBucket</span>: <span class="string">&quot;test-dc7e4.appspot.com&quot;</span>,</span><br><span class="line">    <span class="attr">messagingSenderId</span>: <span class="string">&quot;594878054873&quot;</span>,</span><br><span class="line">    <span class="attr">appId</span>: <span class="string">&quot;1:594878054873:web:9d533554407419fe7259c8&quot;</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// Initialize Firebase</span></span><br><span class="line">  firebase.initializeApp(firebaseConfig);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>我们需要将firebaseConfig中的内容粘贴到，我们的db.js中去：</strong></p>
+<p><strong>我的配置信息如下图所示：</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504101612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ol start="8">
+<li>配置实时数据库 RealTime Database </li>
+</ol>
+<p><strong>这一步，是为了查看聊天室中的实时存储的消息。</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504200221560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p>导航栏左侧的Realtime Database实时数据库 一步步创建即可</p>
+<ul>
+<li>记得数据库位置需要选择美国 US 🇺🇸</li>
+</ul>
+<p><strong>那么，到目前为止，数据库配置信息完成了。</strong></p>
+
+        <h1 id="进入项目"   >
+          <a href="#进入项目" class="heading-link"><i class="fas fa-link"></i></a><a href="#进入项目" class="headerlink" title="进入项目"></a>进入项目</h1>
+      
+        <h2 id="页面的样式添加"   >
+          <a href="#页面的样式添加" class="heading-link"><i class="fas fa-link"></i></a><a href="#页面的样式添加" class="headerlink" title="页面的样式添加"></a>页面的样式添加</h2>
+      <p><strong>进入初始话的文件，我们将没用的初始文件都删掉：component以及assets中的内容</strong></p>
+<p>进入APP.vue中，写好初始页面：</p>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	<span class="keyword">export</span> <span class="keyword">default</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="title">setup</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			</span></span><br><span class="line"><span class="javascript">			<span class="keyword">return</span>&#123;</span></span><br><span class="line"><span class="javascript">				</span></span><br><span class="line"><span class="javascript">			&#125;</span></span><br><span class="line"><span class="javascript">		&#125;</span></span><br><span class="line"><span class="javascript">	&#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;scss&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>我们可以发现，与VUE2.0不同的是，我们使用setup来配置初始化信息，并且在初始化之后，return这些信息，让前端页面任何地方可以引用这些数据（比如用于v-model)。</strong></p>
+<p>接下来，将以下样式贴到style中：</p>
+<figure class="highlight css"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: Avenir, Helvetica, Arial, sans-serif;</span><br><span class="line">	-webkit-<span class="attribute">font-smoothing</span>: antialiased;</span><br><span class="line">	-moz-osx-<span class="attribute">font-smoothing</span>: grayscale;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.view</span> &#123;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">	<span class="attribute">justify-content</span>: center;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#ea526f</span>;</span><br><span class="line">	</span><br><span class="line">	&amp;<span class="selector-class">.login</span> &#123;</span><br><span class="line">		<span class="attribute">align-items</span>: center;</span><br><span class="line">		<span class="selector-class">.login-form</span> &#123;</span><br><span class="line">			<span class="attribute">display</span>: block;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">			<span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">			</span><br><span class="line">			<span class="selector-class">.form-inner</span> &#123;</span><br><span class="line">				<span class="attribute">display</span>: block;</span><br><span class="line">				<span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">				<span class="attribute">padding</span>: <span class="number">50px</span> <span class="number">15px</span>;</span><br><span class="line">				<span class="attribute">border-radius</span>: <span class="number">16px</span>;</span><br><span class="line">				<span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">6px</span> <span class="number">12px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>);</span><br><span class="line">				<span class="selector-tag">h1</span> &#123;</span><br><span class="line">					<span class="attribute">color</span>: <span class="number">#AAA</span>;</span><br><span class="line">					<span class="attribute">font-size</span>: <span class="number">28px</span>;</span><br><span class="line">					<span class="attribute">margin-bottom</span>: <span class="number">30px</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="selector-tag">label</span> &#123;</span><br><span class="line">					<span class="attribute">display</span>: block;</span><br><span class="line">					<span class="attribute">margin-bottom</span>: <span class="number">5px</span>;</span><br><span class="line">					<span class="attribute">color</span>: <span class="number">#AAA</span>;</span><br><span class="line">					<span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">					<span class="attribute">transition</span>: <span class="number">0.4s</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;text&quot;</span>]</span> &#123;</span><br><span class="line">					appearance: none;</span><br><span class="line">					<span class="attribute">border</span>: none;</span><br><span class="line">					<span class="attribute">outline</span>: none;</span><br><span class="line">					<span class="attribute">background</span>: none;</span><br><span class="line">					<span class="attribute">display</span>: block;</span><br><span class="line">					<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">					<span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">					<span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">					<span class="attribute">margin-bottom</span>: <span class="number">15px</span>;</span><br><span class="line">					</span><br><span class="line">					<span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">					<span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">					<span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">0px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">					<span class="attribute">background-color</span>: <span class="number">#F3F3F3</span>;</span><br><span class="line">					<span class="attribute">transition</span>: <span class="number">0.4s</span>;</span><br><span class="line">					&amp;<span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">						<span class="attribute">color</span>: <span class="number">#888</span>;</span><br><span class="line">						<span class="attribute">transition</span>: <span class="number">0.4s</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;submit&quot;</span>]</span> &#123;</span><br><span class="line">					appearance: none;</span><br><span class="line">					<span class="attribute">border</span>: none;</span><br><span class="line">					<span class="attribute">outline</span>: none;</span><br><span class="line">					<span class="attribute">background</span>: none;</span><br><span class="line">					<span class="attribute">display</span>: block;</span><br><span class="line">					<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">					<span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">					<span class="attribute">background-color</span>: <span class="number">#ea526f</span>;</span><br><span class="line">					<span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">					<span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">					<span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">					<span class="attribute">font-weight</span>: <span class="number">700</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				&amp;<span class="selector-pseudo">:focus</span>-within &#123;</span><br><span class="line">					<span class="selector-tag">label</span> &#123;</span><br><span class="line">						<span class="attribute">color</span>: <span class="number">#ea526f</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;text&quot;</span>]</span> &#123;</span><br><span class="line">						<span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">						<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>);</span><br><span class="line">						&amp;<span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">							<span class="attribute">color</span>: <span class="number">#666</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&amp;<span class="selector-class">.chat</span> &#123;</span><br><span class="line">		<span class="attribute">flex-direction</span>: column;</span><br><span class="line">		<span class="selector-tag">header</span> &#123;</span><br><span class="line">			<span class="attribute">position</span>: relative;</span><br><span class="line">			<span class="attribute">display</span>: block;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">			<span class="attribute">padding</span>: <span class="number">50px</span> <span class="number">30px</span> <span class="number">10px</span>;</span><br><span class="line">			<span class="selector-class">.logout</span> &#123;</span><br><span class="line">				<span class="attribute">position</span>: absolute;</span><br><span class="line">				<span class="attribute">top</span>: <span class="number">15px</span>;</span><br><span class="line">				<span class="attribute">right</span>: <span class="number">15px</span>;</span><br><span class="line">				appearance: none;</span><br><span class="line">				<span class="attribute">border</span>: none;</span><br><span class="line">				<span class="attribute">outline</span>: none;</span><br><span class="line">				<span class="attribute">background</span>: none;</span><br><span class="line">				</span><br><span class="line">				<span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">				<span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">				<span class="attribute">margin-bottom</span>: <span class="number">10px</span>;</span><br><span class="line">				<span class="attribute">text-align</span>: right;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="selector-tag">h1</span> &#123;</span><br><span class="line">				<span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="selector-class">.chat-box</span> &#123;</span><br><span class="line">			<span class="attribute">border-radius</span>: <span class="number">24px</span> <span class="number">24px</span> <span class="number">0px</span> <span class="number">0px</span>;</span><br><span class="line">			<span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">			<span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">0px</span> <span class="number">12px</span> <span class="built_in">rgba</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">0.2</span>);</span><br><span class="line">			<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">1</span> <span class="number">100%</span>;</span><br><span class="line">			<span class="attribute">padding</span>: <span class="number">30px</span>;</span><br><span class="line">			<span class="selector-class">.message</span> &#123;</span><br><span class="line">				<span class="attribute">display</span>: flex;</span><br><span class="line">				<span class="attribute">margin-bottom</span>: <span class="number">15px</span>;</span><br><span class="line">				</span><br><span class="line">				<span class="selector-class">.message-inner</span> &#123;</span><br><span class="line">					<span class="selector-class">.username</span> &#123;</span><br><span class="line">						<span class="attribute">color</span>: <span class="number">#888</span>;</span><br><span class="line">						<span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">						<span class="attribute">margin-bottom</span>: <span class="number">5px</span>;</span><br><span class="line">						<span class="attribute">padding-left</span>: <span class="number">15px</span>;</span><br><span class="line">						<span class="attribute">padding-right</span>: <span class="number">15px</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="selector-class">.content</span> &#123;</span><br><span class="line">						<span class="attribute">display</span>: inline-block;</span><br><span class="line">						<span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">20px</span>;</span><br><span class="line">						<span class="attribute">background-color</span>: <span class="number">#F3F3F3</span>;</span><br><span class="line">						<span class="attribute">border-radius</span>: <span class="number">999px</span>;</span><br><span class="line">						<span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">						<span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">						<span class="attribute">line-height</span>: <span class="number">1.2em</span>;</span><br><span class="line">						<span class="attribute">text-align</span>: left;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				&amp;<span class="selector-class">.current-user</span> &#123;</span><br><span class="line">					<span class="attribute">margin-top</span>: <span class="number">30px</span>;</span><br><span class="line">					<span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">					<span class="attribute">text-align</span>: right;</span><br><span class="line">					<span class="selector-class">.message-inner</span> &#123;</span><br><span class="line">						<span class="attribute">max-width</span>: <span class="number">75%</span>;</span><br><span class="line">						<span class="selector-class">.content</span> &#123;</span><br><span class="line">							<span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">							<span class="attribute">font-weight</span>: <span class="number">600</span>;</span><br><span class="line">							<span class="attribute">background-color</span>: <span class="number">#ea526f</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="selector-tag">footer</span> &#123;</span><br><span class="line">			<span class="attribute">position</span>: sticky;</span><br><span class="line">			<span class="attribute">bottom</span>: <span class="number">0px</span>;</span><br><span class="line">			<span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">			<span class="attribute">padding</span>: <span class="number">30px</span>;</span><br><span class="line">			<span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">0px</span> <span class="number">12px</span> <span class="built_in">rgba</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">0.2</span>);</span><br><span class="line">			<span class="selector-tag">form</span> &#123;</span><br><span class="line">				<span class="attribute">display</span>: flex;</span><br><span class="line">				<span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;text&quot;</span>]</span> &#123;</span><br><span class="line">					<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">1</span> <span class="number">100%</span>;</span><br><span class="line">					appearance: none;</span><br><span class="line">					<span class="attribute">border</span>: none;</span><br><span class="line">					<span class="attribute">outline</span>: none;</span><br><span class="line">					<span class="attribute">background</span>: none;</span><br><span class="line">					<span class="attribute">display</span>: block;</span><br><span class="line">					<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">					<span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">					<span class="attribute">border-radius</span>: <span class="number">8px</span> <span class="number">0px</span> <span class="number">0px</span> <span class="number">8px</span>;</span><br><span class="line">					</span><br><span class="line">					<span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">					<span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">					<span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">0px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">					<span class="attribute">background-color</span>: <span class="number">#F3F3F3</span>;</span><br><span class="line">					<span class="attribute">transition</span>: <span class="number">0.4s</span>;</span><br><span class="line">					&amp;<span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">						<span class="attribute">color</span>: <span class="number">#888</span>;</span><br><span class="line">						<span class="attribute">transition</span>: <span class="number">0.4s</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				<span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;submit&quot;</span>]</span> &#123;</span><br><span class="line">					appearance: none;</span><br><span class="line">					<span class="attribute">border</span>: none;</span><br><span class="line">					<span class="attribute">outline</span>: none;</span><br><span class="line">					<span class="attribute">background</span>: none;</span><br><span class="line">					<span class="attribute">display</span>: block;</span><br><span class="line">					<span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">					<span class="attribute">border-radius</span>: <span class="number">0px</span> <span class="number">8px</span> <span class="number">8px</span> <span class="number">0px</span>;</span><br><span class="line">					<span class="attribute">background-color</span>: <span class="number">#ea526f</span>;</span><br><span class="line">					<span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">					<span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">					<span class="attribute">font-weight</span>: <span class="number">700</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="登陆模块"   >
+          <a href="#登陆模块" class="heading-link"><i class="fas fa-link"></i></a><a href="#登陆模块" class="headerlink" title="登陆模块"></a>登陆模块</h2>
+      <ul>
+<li><p>定义默认提交进入的方法 @submit.prevent=”Login” 绑定事件</p>
+</li>
+<li><p>定义登陆时，输入框中输入的信息所绑定的变量(导入vue的ref) const inputUsername = ref(“”);</p>
+</li>
+<li><p>登录时，将输入框中的值对应的信息保存数据库中，否则下次登陆系统后，以前的信息（包括用户名与消息）都不会保存起来(导入vue的reactive响应变动)</p>
+</li>
+</ul>
+<ol>
+<li>JS中的setup中配置相应的变量与方法（记得返回这些数据让页面显示可以使用）</li>
+</ol>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> db <span class="keyword">from</span> <span class="string">&#x27;./db&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line">	setup () &#123;</span><br><span class="line">		<span class="comment">//定义输入框输入绑定的变量 以及 保存用户信息的state变量</span></span><br><span class="line">		<span class="keyword">const</span> inputUsername = ref(<span class="string">&quot;&quot;</span>); <span class="comment">//初始化为空 相当于vue2.0的 inputUsername: &#x27;&#x27;</span></span><br><span class="line">		<span class="keyword">const</span> state = reactive(&#123; <span class="comment">//用户发的信息 后面会用到</span></span><br><span class="line">			<span class="attr">username</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="attr">messages</span>: [] </span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//定义表单提交绑定的方法</span></span><br><span class="line">		<span class="keyword">const</span> Login = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			<span class="comment">//与vue2.0不同的是 我们不再用this.val</span></span><br><span class="line">			<span class="comment">//检测到用户输入信息 就存储用户登陆信息</span></span><br><span class="line">			<span class="keyword">if</span>(inputUsername.value != <span class="string">&quot;&quot;</span> || inputUsername.value != <span class="literal">null</span>)&#123;</span><br><span class="line">				state.username = inputUsername.value;</span><br><span class="line">				inputUsername.value = <span class="string">&quot;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span>&#123;</span><br><span class="line">			inputUsername,</span><br><span class="line">			Login,</span><br><span class="line">			state</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<ol start="2">
+<li>页面显示</li>
+</ol>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;view login&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;state.username === &#x27;&#x27; || state.username === null&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;login-form&quot;</span> @<span class="attr">submit.prevent</span>=<span class="string">&quot;Login&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-inner&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Login to FireChat<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;username&quot;</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">v-model</span>=<span class="string">&quot;inputUsername&quot;</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">placeholder</span>=<span class="string">&quot;Please enter your username...&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">value</span>=<span class="string">&quot;Login&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;view chat&quot;</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span> 这是聊天室显示区域 <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>用户界面效果图，如下图所示：</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504194806246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><strong>可以看到，我们使用了v-if进行判断</strong></p>
+<p><strong>如果存储在state中的用户名信息不为空（即表示用户填入了信息想进入聊天室）</strong></p>
+<p><strong>则显示这是聊天室显示区域 否则会显示登陆区域让用户进行登陆(由于是在线聊天室，不设置密码)</strong></p>
+<ol start="3">
+<li>从聊天室中注销出来</li>
+</ol>
+<p><strong>刚才我们模拟进入了聊天室，现在我们添加注销功能</strong></p>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;view chat&quot;</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;logout&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;Logout&quot;</span>&gt;</span>Logout<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome, &#123;&#123; state.username &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>前端页面写好了，补充JS中的Logout方法，还是写在setup中</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Logout = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	state.username = <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//别忘了return 让前端页面调用</span></span><br><span class="line"><span class="keyword">return</span>&#123;</span><br><span class="line">	...Login,</span><br><span class="line">	state,</span><br><span class="line">	Logout </span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>前面提到了，当state中的username为空或者为null时，会显示登陆区域。</strong></p>
+<ol start="4">
+<li>为聊天室添加（发送消息，查看消息功能）</li>
+</ol>
+<p><strong>这是最后一个步骤了，也是需要用到firebase（特别是我们刚才配置的实时数据库）的一步</strong></p>
+<p>首先在刚才注销区域<code>&lt;header&gt;</code>标签 的下方，加入代码：</p>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;chat-box&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">v-for</span>=<span class="string">&quot;message in state.messages&quot;</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">:key</span>=<span class="string">&quot;message.key&quot;</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">:class</span>=<span class="string">&quot;(message.username == state.username ? &#x27;message current-user&#x27; : &#x27;message&#x27;)&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;message-inner&quot;</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;username&quot;</span>&gt;</span>&#123;&#123; message.username &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span>&#123;&#123; message.content &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">form</span> @<span class="attr">submit.prevent</span>=<span class="string">&quot;SendMessage&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> </span></span><br><span class="line"><span class="tag">	  <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> </span></span><br><span class="line"><span class="tag">	  <span class="attr">v-model</span>=<span class="string">&quot;inputMessage&quot;</span> </span></span><br><span class="line"><span class="tag">	  <span class="attr">placeholder</span>=<span class="string">&quot;Write a message...&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> </span></span><br><span class="line"><span class="tag">	  <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> </span></span><br><span class="line"><span class="tag">	  <span class="attr">value</span>=<span class="string">&quot;Send&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p><em>可以看到，我们用到了SendMessage方法用来发送数据</em></p>
+<ul>
+<li><p>用到了state中的messages并且将当前用户的前端样式区别于其他用户</p>
+</li>
+<li><p>并且从messages中取出所有消息 利用v-for在前端中显示</p>
+</li>
+<li><p>输入的消息绑定v-model inputMessage</p>
+</li>
+</ul>
+<p><mark>那么，下面就可以定义消息变量以及相应发送消息的函数！</mark></p>
+<p><strong>还是写在setup中 并注意return给前端使用</strong></p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//const inputUsername = ref(&quot;&quot;);</span></span><br><span class="line"><span class="keyword">const</span> inputMessage = ref(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SendMessage = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> messagesRef = db.database().ref(<span class="string">&quot;messages&quot;</span>); <span class="comment">//firebase数据库</span></span><br><span class="line">	<span class="keyword">if</span>(inputMessage.value === <span class="string">&quot;&quot;</span> || inputMessage.value === value)&#123; <span class="comment">//用户不能发送空消息</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">const</span> message = &#123; <span class="comment">//准备将发送的消息存储至数据库中</span></span><br><span class="line">		<span class="attr">username</span>: stae.username,</span><br><span class="line">		<span class="attr">content</span>: inputMessage.value</span><br><span class="line">	&#125;</span><br><span class="line">	messageRef.push(message); <span class="comment">//相当于MySQL中的insert firebase是基于JSON的 故用push</span></span><br><span class="line">	inputMessage.value = <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>那么，到目前位置，我们写入数据库的操作就写完了。</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504201725607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<ul>
+<li><p>但是现在是无法实时看到，任何用户发送的消息的，为什么？</p>
+</li>
+<li><p>因为，我们虽然存储到了firebase数据库中去，但是我们每次v-for取出的数据，是从state中取出的</p>
+</li>
+</ul>
+<p><strong>因此，下一步我们需要，在进入聊天室时，将数据库中的数据赋给state</strong></p>
+<ol start="5">
+<li>firebase检索数据(写在onMounted钩子函数中)</li>
+</ol>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> messagesRef = db.database().ref(<span class="string">&quot;messages&quot;</span>); <span class="comment">//选择数据库</span></span><br><span class="line">  messagesRef.on(<span class="string">&#x27;value&#x27;</span>, <span class="function"><span class="params">snapshot</span> =&gt;</span> &#123; <span class="comment">//on 用于firebase数据库检索数据</span></span><br><span class="line">	<span class="keyword">const</span> data = snapshot.val();</span><br><span class="line">	<span class="keyword">let</span> messages = [];</span><br><span class="line">	<span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">	  messages.push(&#123;</span><br><span class="line">		<span class="attr">id</span>: key,</span><br><span class="line">		<span class="attr">username</span>: data[key].username,</span><br><span class="line">		<span class="attr">content</span>: data[key].content</span><br><span class="line">	  &#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">	state.messages = messages;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>其中，data是我们从数据库中查询到的所有数据。</strong></p>
+<p><strong>如果我们试着打印以下内容，你会发现：</strong></p>
+<p><img   src="https://img-blog.csdnimg.cn/20210504202829214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70" style="width: image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,tepx;height: t_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQzNDQ1MDY3,size_16,color_FFFFFF,t_70px;"  alt="在这里插入图片描述"></p>
+<p><em>因为，Firebase中存储的信息都是JSON对象，那么，我们就要用相应的方法来遍历每个对象，并将所有对象存储在messages中</em></p>
+<p><strong>最后将messages的内容，赋给我们的state 好让我们的v-for循环遍历数据可以生效！</strong></p>
+<p><strong>并且值得注意的是，每次有新的内容添加至数据库时（即每次发送消息时）</strong></p>
+<ul>
+<li>这个messagesRef.on(‘value’, …) 都会被调用一次，我们可以看成是事件监听（每当有新的数据时，会被调用！)</li>
+</ul>
+
+        <h1 id="文末总结"   >
+          <a href="#文末总结" class="heading-link"><i class="fas fa-link"></i></a><a href="#文末总结" class="headerlink" title="文末总结"></a>文末总结</h1>
+      <p>P.S. 该文所有的代码以及教程均来自YT博主（非自己原创）只不过自己以文字思路的形式写成笔记而已</p>
+<ol>
+<li><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/TylerPottsDev/FireChat-Vue" >点我查看源码地址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</li>
+<li><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=72Fk9i9HcZM&t=197s" >点我查看视频教学</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</li>
+</ol>
+<p><strong>如果哪里有写的不对的地方，多多包涵，请于文章下方的评论区告知，谢谢！</strong></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://vincent990413.github.io">何水浪</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://vincent990413.github.io/2021/05/04/%E5%9F%BA%E4%BA%8EVUE-Firebase%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4APP/">https://vincent990413.github.io/2021/05/04/%E5%9F%BA%E4%BA%8EVUE-Firebase%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4APP/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://vincent990413.github.io/tags/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/">前端项目</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/05/07/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0-16%E4%B8%AA%E4%BB%A3%E6%9B%BFvery%E7%9A%84%E8%A1%A8%E8%BE%BE/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">英语学习_16个代替very的表达</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/04/27/VUE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%9B%B8%E5%BA%94%E5%BA%94%E7%94%A8-2/"><span class="paginator-prev__text">VUE学习笔记-基础语法及其应用-2-深入组件开发</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">
+          前期准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93Firebase"><span class="toc-number">3.</span> <span class="toc-text">
+          配置项目的数据库Firebase</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Src-%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%88%9B%E5%BB%BAdb-js-firebase%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">
+          Src 目录下创建db.js firebase配置数据库信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E9%A1%B9%E7%9B%AE"><span class="toc-number">4.</span> <span class="toc-text">
+          进入项目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%A0%B7%E5%BC%8F%E6%B7%BB%E5%8A%A0"><span class="toc-number">4.1.</span> <span class="toc-text">
+          页面的样式添加</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E9%99%86%E6%A8%A1%E5%9D%97"><span class="toc-number">4.2.</span> <span class="toc-text">
+          登陆模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%9C%AB%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">
+          文末总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">C'est la vie</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>何水浪</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: 'fJ4fFnieffDVKy4Jkn16aHdO-gzGzoHsz',
+    appKey: 'qfVo2CUC2pJ3udFzLFnd0GBM',
+    notify: true,
+    verify: true,
+    placeholder: '说点啥再走呗~爱你',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: false,
+    recordIP: false,
+    lang: '' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
